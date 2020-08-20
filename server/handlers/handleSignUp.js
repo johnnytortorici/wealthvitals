@@ -29,7 +29,7 @@ const handleSignUp = async (req, res) => {
 
     // insert new user into the users collection
     const newUser = { name, email, hashedPassword };
-    const r = await db.collection("users").insertOne(newUser, (err) => {
+    await db.collection("users").insertOne(newUser, (err) => {
       if (err) console.log(err);
       else res.status(201).json({ status: 201, user: { name, email } });
       console.log("New user added.");
