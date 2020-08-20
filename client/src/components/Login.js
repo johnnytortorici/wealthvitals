@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 
+import { AuthContext } from "./context/AuthContext";
 import { UserContext } from "../components/UserContext";
 
 const Login = () => {
-  const { email, setEmail, isLoggedIn, setIsLoggedIn } = React.useContext(
-    UserContext
-  );
+  const { setTokens } = useContext(AuthContext);
+  const { email, setEmail } = useContext(UserContext);
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const [password, setPassword] = useState("");
 
   const handleLogin = (ev) => {
@@ -23,7 +24,8 @@ const Login = () => {
       .then((res) => res.json())
       .then((json) => {
         if (json.status === 200) {
-          setIsLoggedIn(true);
+          setTokens(Date.now());
+          setLoggedIn(true);
         } else {
           console.log(json);
         }
