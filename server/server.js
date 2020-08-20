@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
-const bcrypt = require("bcrypt");
+const bodyParser = require("body-parser");
 
-const users = [];
+const { handleSignUp } = require("./handlers/handleSignUp");
 
 app.listen(8000);
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.post("/signup", (req, res) => {});
+// endpoints
+app.post("/signup", handleSignUp);
 app.post("/login", (req, res) => {});
