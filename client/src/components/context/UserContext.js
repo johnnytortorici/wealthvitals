@@ -8,7 +8,7 @@ export const UserProvider = ({ children }) => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
 
-  const { authTokens } = React.useContext(AuthContext);
+  const { authTokens, setTokens } = React.useContext(AuthContext);
 
   const getUser = (id) => {
     fetch(`/getUser`, {
@@ -31,6 +31,13 @@ export const UserProvider = ({ children }) => {
       });
   };
 
+  const logOut = () => {
+    setStatus("loading");
+    setName();
+    setEmail();
+    setTokens();
+  };
+
   if (name === undefined) {
     if (authTokens) {
       const tokenId = JSON.parse(localStorage.getItem("tokens"));
@@ -39,7 +46,7 @@ export const UserProvider = ({ children }) => {
   }
 
   return (
-    <UserContext.Provider value={{ status, name, email, getUser }}>
+    <UserContext.Provider value={{ status, name, email, getUser, logOut }}>
       {children}
     </UserContext.Provider>
   );

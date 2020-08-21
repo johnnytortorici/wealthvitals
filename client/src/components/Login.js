@@ -1,8 +1,12 @@
 import React, { useState, useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
+import styled from "styled-components";
 
 import { AuthContext } from "./context/AuthContext";
 import { UserContext } from "./context/UserContext";
+
+import { COLORS } from "../constants";
+import LoginButton from "./buttons/PrimaryButton";
 
 const Login = () => {
   const { authTokens, setTokens } = useContext(AuthContext);
@@ -36,13 +40,13 @@ const Login = () => {
   };
 
   return (
-    <>
+    <Wrapper>
       {authTokens && <Redirect to="/dashboard" />}
-      <h1>Login</h1>
-      <p>{error}</p>
-      <form onSubmit={(ev) => handleLogin(ev)}>
-        <div>
-          <label htmlFor="email">Email</label>
+      <LoginWrapper>
+        <Heading>Login</Heading>
+        <Error>{error}</Error>
+        <Form onSubmit={(ev) => handleLogin(ev)}>
+          <InputLabel htmlFor="email">Email</InputLabel>
           <input
             type="email"
             id="email"
@@ -50,9 +54,7 @@ const Login = () => {
             onChange={(ev) => setEmail(ev.currentTarget.value)}
             required
           />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
+          <InputLabel htmlFor="password">Password</InputLabel>
           <input
             type="password"
             id="password"
@@ -60,12 +62,54 @@ const Login = () => {
             onChange={(ev) => setPassword(ev.currentTarget.value)}
             required
           />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-      <a href="/signup">Sign up</a>
-    </>
+          <LoginButton type="submit">Login</LoginButton>
+        </Form>
+        <Helper>
+          New to Wealthvitals? <Link to="/signup">Sign up</Link>
+        </Helper>
+      </LoginWrapper>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LoginWrapper = styled.div`
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid ${COLORS.BORDER};
+  border-radius: 5px;
+  box-shadow: 0 0 5px ${COLORS.BORDER};
+`;
+
+const Heading = styled.h1`
+  text-align: center;
+`;
+
+const Error = styled.p`
+  padding-top: 10px;
+  font-size: 0.8em;
+  text-align: center;
+  color: ${COLORS.RED};
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const InputLabel = styled.label`
+  padding: 10px 0 5px;
+`;
+
+const Helper = styled.p`
+  font-size: 0.8em;
+  text-align: center;
+`;
 
 export default Login;

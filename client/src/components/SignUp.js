@@ -1,8 +1,12 @@
 import React, { useState, useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
+import styled from "styled-components";
 
 import { AuthContext } from "./context/AuthContext";
 import { UserContext } from "./context/UserContext";
+
+import { COLORS } from "../constants";
+import SignUpButton from "./buttons/PrimaryButton";
 
 const SignUp = () => {
   const { authTokens, setTokens } = useContext(AuthContext);
@@ -11,6 +15,7 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSignUp = (ev) => {
     ev.preventDefault();
@@ -35,12 +40,13 @@ const SignUp = () => {
   };
 
   return (
-    <>
+    <Wrapper>
       {authTokens && <Redirect to="/dashboard" />}
-      <h1>Sign up</h1>
-      <form onSubmit={(ev) => handleSignUp(ev)}>
-        <div>
-          <label htmlFor="name">Name</label>
+      <SignUpWrapper>
+        <Heading>Sign up</Heading>
+        <Error>{error}</Error>
+        <Form onSubmit={(ev) => handleSignUp(ev)}>
+          <InputLabel htmlFor="name">Name</InputLabel>
           <input
             type="text"
             id="name"
@@ -48,9 +54,7 @@ const SignUp = () => {
             onChange={(ev) => setName(ev.currentTarget.value)}
             required
           />
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
+          <InputLabel htmlFor="email">Email</InputLabel>
           <input
             type="email"
             id="email"
@@ -58,9 +62,7 @@ const SignUp = () => {
             onChange={(ev) => setEmail(ev.currentTarget.value)}
             required
           />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
+          <InputLabel htmlFor="password">Password</InputLabel>
           <input
             type="password"
             id="password"
@@ -68,12 +70,54 @@ const SignUp = () => {
             onChange={(ev) => setPassword(ev.currentTarget.value)}
             required
           />
-        </div>
-        <button type="submit">Sign up</button>
-      </form>
-      <a href="/login">Login</a>
-    </>
+          <SignUpButton type="submit">Sign up</SignUpButton>
+        </Form>
+        <Helper>
+          Already have an account? <Link to="/login">Login</Link>
+        </Helper>
+      </SignUpWrapper>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SignUpWrapper = styled.div`
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid ${COLORS.BORDER};
+  border-radius: 5px;
+  box-shadow: 0 0 5px ${COLORS.BORDER};
+`;
+
+const Heading = styled.h1`
+  text-align: center;
+`;
+
+const Error = styled.p`
+  padding-top: 10px;
+  font-size: 0.8em;
+  text-align: center;
+  color: ${COLORS.RED};
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const InputLabel = styled.label`
+  padding: 10px 0 5px;
+`;
+
+const Helper = styled.p`
+  font-size: 0.8em;
+  text-align: center;
+`;
 
 export default SignUp;
