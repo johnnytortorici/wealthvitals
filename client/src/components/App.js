@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { UserProvider } from "./context/UserContext";
+import GlobalStyles from "./GlobalStyles";
 
 import Login from "./Login";
 import SignUp from "./SignUp";
@@ -11,6 +12,7 @@ function App() {
   return (
     <AuthProvider>
       <UserProvider>
+        <GlobalStyles />
         <Router>
           <Switch>
             <Route path="/login">
