@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
-import { UserContext } from "../UserContext";
+import { UserContext } from "../context/UserContext";
 
 const Dashboard = () => {
   const { authTokens, setTokens } = React.useContext(AuthContext);

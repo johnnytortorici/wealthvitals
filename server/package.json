@@ -2,7 +2,6 @@
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
-  "proxy": "http://localhost:8000",
   "scripts": {
     "start": "nodemon server.js"
   },

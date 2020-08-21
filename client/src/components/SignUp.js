@@ -2,12 +2,14 @@ import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 
 import { AuthContext } from "./context/AuthContext";
-import { UserContext } from "../components/UserContext";
+import { UserContext } from "./context/UserContext";
 
 const SignUp = () => {
-  const { setTokens } = useContext(AuthContext);
-  const { name, setName, email, setEmail } = React.useContext(UserContext);
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const { authTokens, setTokens } = useContext(AuthContext);
+  const { getUser } = useContext(UserContext);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSignUp = (ev) => {
@@ -24,8 +26,8 @@ const SignUp = () => {
       .then((res) => res.json())
       .then((json) => {
         if (json.status === 201) {
-          setTokens(Date.now());
-          setLoggedIn(true);
+          getUser(json.user._id);
+          setTokens(json.user._id);
         } else {
           alert("Something went wrong.");
         }
@@ -34,7 +36,7 @@ const SignUp = () => {
 
   return (
     <>
-      {isLoggedIn && <Redirect to="/dashboard" />}
+      {authTokens && <Redirect to="/dashboard" />}
       <h1>Sign up</h1>
       <form onSubmit={(ev) => handleSignUp(ev)}>
         <div>

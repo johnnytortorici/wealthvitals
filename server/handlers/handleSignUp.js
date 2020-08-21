@@ -31,8 +31,13 @@ const handleSignUp = async (req, res) => {
     const newUser = { name, email, hashedPassword };
     await db.collection("users").insertOne(newUser, (err) => {
       if (err) console.log(err);
-      else res.status(201).json({ status: 201, user: { name, email } });
-      console.log("New user added.");
+      else {
+        res.status(201).json({
+          status: 201,
+          user: { _id: newUser._id, name, email },
+        });
+        console.log("New user added.");
+      }
     });
   } catch {
     res.status(500).json({ status: 500, message: "Something went wrong." });

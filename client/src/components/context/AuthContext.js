@@ -3,8 +3,6 @@ import React, { useState } from "react";
 export const AuthContext = React.createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticate] = useState(false);
-
   const existingTokens = JSON.parse(localStorage.getItem("tokens"));
   const [authTokens, setAuthTokens] = useState(existingTokens);
 
@@ -19,9 +17,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider
-      value={{ isAuthenticated, setIsAuthenticate, authTokens, setTokens }}
-    >
+    <AuthContext.Provider value={{ authTokens, setTokens }}>
       {children}
     </AuthContext.Provider>
   );

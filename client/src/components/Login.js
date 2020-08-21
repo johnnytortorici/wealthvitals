@@ -2,13 +2,15 @@ import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 
 import { AuthContext } from "./context/AuthContext";
-import { UserContext } from "../components/UserContext";
+import { UserContext } from "./context/UserContext";
 
 const Login = () => {
-  const { setTokens } = useContext(AuthContext);
-  const { email, setEmail } = useContext(UserContext);
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const { authTokens, setTokens } = useContext(AuthContext);
+  const { getUser } = useContext(UserContext);
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleLogin = (ev) => {
     ev.preventDefault();
@@ -24,9 +26,10 @@ const Login = () => {
       .then((res) => res.json())
       .then((json) => {
         if (json.status === 200) {
-          setTokens(Date.now());
-          setLoggedIn(true);
+          getUser(json.user._id);
+          setTokens(json.user._id);
         } else {
+          setError(json.message);
           console.log(json);
         }
       });
@@ -34,8 +37,9 @@ const Login = () => {
 
   return (
     <>
-      {isLoggedIn && <Redirect to="/dashboard" />}
+      {authTokens && <Redirect to="/dashboard" />}
       <h1>Login</h1>
+      <p>{error}</p>
       <form onSubmit={(ev) => handleLogin(ev)}>
         <div>
           <label htmlFor="email">Email</label>
