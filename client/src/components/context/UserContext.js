@@ -4,8 +4,10 @@ import { AuthContext } from "./AuthContext";
 export const UserContext = React.createContext(null);
 
 export const UserProvider = ({ children }) => {
+  const [status, setStatus] = useState("loading");
   const [name, setName] = useState();
   const [email, setEmail] = useState();
+
   const { authTokens } = React.useContext(AuthContext);
 
   const getUser = (id) => {
@@ -22,6 +24,7 @@ export const UserProvider = ({ children }) => {
           const { _id, name, email } = json.user;
           setName(name);
           setEmail(email);
+          setStatus("idle");
         } else {
           console.log(json);
         }
@@ -36,7 +39,7 @@ export const UserProvider = ({ children }) => {
   }
 
   return (
-    <UserContext.Provider value={{ name, email, getUser }}>
+    <UserContext.Provider value={{ status, name, email, getUser }}>
       {children}
     </UserContext.Provider>
   );
