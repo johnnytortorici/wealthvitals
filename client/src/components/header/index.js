@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 import { UserContext } from "../context/UserContext";
@@ -12,7 +13,17 @@ const Header = () => {
 
   return (
     <Wrapper>
-      <Logo />
+      <LogoNav>
+        <Logo />
+        <Nav>
+          <NavItemLink to="/dashboard" activeClassName="selected">
+            Dashboard
+          </NavItemLink>
+          <NavItemLink to="/modules" activeClassName="selected">
+            Modules
+          </NavItemLink>
+        </Nav>
+      </LogoNav>
       <Admin>
         <p>Hi, {name}</p>
         <Logout onClick={logOut}>Log out</Logout>
@@ -28,6 +39,27 @@ const Wrapper = styled.div`
   padding: 20px;
   color: #fff;
   background-color: ${COLORS.THEME};
+`;
+
+const LogoNav = styled.nav`
+  display: flex;
+  align-items: center;
+`;
+
+const Nav = styled.nav`
+  padding-left: 50px;
+`;
+
+const NavItemLink = styled(NavLink)`
+  color: #fff;
+  text-decoration: none;
+  margin-right: 30px;
+  &:hover {
+    opacity: 0.8;
+  }
+  &.selected {
+    border-bottom: 2px solid #fff;
+  }
 `;
 
 const Admin = styled.div`

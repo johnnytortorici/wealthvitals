@@ -22,7 +22,7 @@ const Dashboard = () => {
         <>
           <Header />
           <Wrapper>
-            <h1>Dashboard</h1>
+            <p>Wealthvitals score</p>
           </Wrapper>
         </>
       )}
