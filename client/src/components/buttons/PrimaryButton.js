@@ -8,7 +8,7 @@ export default styled(UnstyledButton)`
   margin: 15px 0;
   text-align: center;
   background-color: ${COLORS.THEME};
-  color: white;
+  color: #fff;
   border-radius: 5px;
   transition: 0.15s;
   &:hover {

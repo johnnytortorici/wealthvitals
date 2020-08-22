@@ -6,6 +6,7 @@ import { AuthContext } from "./context/AuthContext";
 import { UserContext } from "./context/UserContext";
 
 import { COLORS } from "../constants";
+import Logo from "./Logo";
 import SignUpButton from "./buttons/PrimaryButton";
 
 const SignUp = () => {
@@ -42,6 +43,7 @@ const SignUp = () => {
   return (
     <Wrapper>
       {authTokens && <Redirect to="/dashboard" />}
+      <Logo />
       <SignUpWrapper>
         <Heading>Sign up</Heading>
         <Error>{error}</Error>
@@ -83,12 +85,15 @@ const SignUp = () => {
 const Wrapper = styled.div`
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
 const SignUpWrapper = styled.div`
+  margin-top: 40px;
   padding: 20px;
+  width: 300px;
   background-color: #fff;
   border: 1px solid ${COLORS.BORDER};
   border-radius: 5px;
