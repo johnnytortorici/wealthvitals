@@ -8,6 +8,10 @@ import { UserContext } from "../context/UserContext";
 import { COLORS } from "../../constants";
 import Header from "../header";
 import Loading from "../Loading";
+import Module from "../Module";
+
+import { GiReceiveMoney, GiUmbrella, GiPiggyBank } from "react-icons/gi";
+import { BsCreditCard } from "react-icons/bs";
 
 const Dashboard = () => {
   const { authTokens } = React.useContext(AuthContext);
@@ -22,7 +26,19 @@ const Dashboard = () => {
         <>
           <Header />
           <Wrapper>
-            <p>Wealthvitals score</p>
+            <p>Wealthvitals score (?)</p>
+            <WvScore>80%</WvScore>
+            <ScoreHelper>Very good!</ScoreHelper>
+            <ModulesWrapper>
+              <Module num={"1"} name={"Cash flow"} icon={<GiReceiveMoney />} />
+              <Module num={"2"} name={"Emergency fund"} icon={<GiUmbrella />} />
+              <Module
+                num={"3"}
+                name={"Debt management"}
+                icon={<BsCreditCard />}
+              />
+              <Module num={"4"} name={"Goal funding"} icon={<GiPiggyBank />} />
+            </ModulesWrapper>
           </Wrapper>
         </>
       )}
@@ -32,6 +48,19 @@ const Dashboard = () => {
 
 const Wrapper = styled.div`
   padding: 20px;
+`;
+
+const WvScore = styled.p`
+  font-size: 3em;
+`;
+
+const ScoreHelper = styled.p`
+  font-size: 0.8em;
+`;
+
+const ModulesWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 export default Dashboard;
