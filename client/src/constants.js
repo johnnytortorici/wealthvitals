@@ -6,4 +6,13 @@ export const COLORS = {
   BLUE: "rgb(27, 149, 224)",
   GREEN: "rgb(23, 191, 99)",
   RED: "rgb(224, 36, 94)",
+  ORANGE: "rgb(255,69,0)",
+};
+
+export const SIZE = {
+  HELPER: "0.9em",
+};
+
+export const BREAK = {
+  MEDIUM: "950px",
 };

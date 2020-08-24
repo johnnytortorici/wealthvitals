@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   font-weight: 600;
-  font-size: 1.5em;
+  font-size: 1.7em;
 `;
 
 export default Logo;

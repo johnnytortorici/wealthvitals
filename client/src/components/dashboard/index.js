@@ -5,10 +5,10 @@ import styled from "styled-components";
 import { AuthContext } from "../context/AuthContext";
 import { UserContext } from "../context/UserContext";
 
-import { COLORS } from "../../constants";
+import { COLORS, SIZE } from "../../constants";
 import Header from "../header";
 import Loading from "../Loading";
-import Module from "../Module";
+import Module from "./Module";
 
 import { GiReceiveMoney, GiUmbrella, GiPiggyBank } from "react-icons/gi";
 import { BsCreditCard } from "react-icons/bs";
@@ -26,9 +26,14 @@ const Dashboard = () => {
         <>
           <Header />
           <Wrapper>
-            <p>Wealthvitals score (?)</p>
-            <WvScore>80%</WvScore>
-            <ScoreHelper>Very good!</ScoreHelper>
+            <PageHeading>
+              <ScoreWrapper>
+                <p>Wealthvitals score (?)</p>
+                <WvScore>80%</WvScore>
+                <ScoreHelper>Very good!</ScoreHelper>
+              </ScoreWrapper>
+              <Title>My Financial Plan</Title>
+            </PageHeading>
             <ModulesWrapper>
               <Module num={"1"} name={"Cash flow"} icon={<GiReceiveMoney />} />
               <Module num={"2"} name={"Emergency fund"} icon={<GiUmbrella />} />
@@ -50,17 +55,32 @@ const Wrapper = styled.div`
   padding: 20px;
 `;
 
+const PageHeading = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const ScoreWrapper = styled.div`
+  width: 33%;
+`;
+
 const WvScore = styled.p`
   font-size: 3em;
 `;
 
 const ScoreHelper = styled.p`
-  font-size: 0.8em;
+  font-size: ${SIZE.HELPER};
+`;
+
+const Title = styled.h1`
+  width: 33%;
+  text-align: center;
 `;
 
 const ModulesWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 `;
 
 export default Dashboard;

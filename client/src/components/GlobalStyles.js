@@ -11,10 +11,7 @@ export default createGlobalStyle`
     font-family: 'Raleway', sans-serif;
     background-color: ${COLORS.BACKGROUND};
     color: ${COLORS.PRIMARY_TEXT};
-    font-size: 1.2em;
-  }
-  h1 {
-    font-size: 1.8em;
+    font-size: 1.1em;
   }
   a {
     color: ${COLORS.PRIMARY_TEXT};
