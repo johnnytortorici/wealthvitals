@@ -7,6 +7,7 @@ import GlobalStyles from "./GlobalStyles";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import Dashboard from "./dashboard";
+import CashFlow from "./modules/CashFlow";
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
             </Route>
             <Route path="/dashboard">
               <Dashboard />
+            </Route>
+            <Route path="/cashflow">
+              <CashFlow />
             </Route>
           </Switch>
         </Router>

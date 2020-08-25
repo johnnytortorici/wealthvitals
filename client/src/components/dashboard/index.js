@@ -32,17 +32,33 @@ const Dashboard = () => {
                 <WvScore>80%</WvScore>
                 <ScoreHelper>Very good!</ScoreHelper>
               </ScoreWrapper>
-              <Title>My Financial Plan</Title>
+              <Title>My Financial Plan (?)</Title>
             </PageHeading>
             <ModulesWrapper>
-              <Module num={"1"} name={"Cash flow"} icon={<GiReceiveMoney />} />
-              <Module num={"2"} name={"Emergency fund"} icon={<GiUmbrella />} />
+              <Module
+                num={"1"}
+                name={"Cash flow"}
+                icon={<GiReceiveMoney />}
+                path={"/cashflow"}
+              />
+              <Module
+                num={"2"}
+                name={"Emergency fund"}
+                icon={<GiUmbrella />}
+                path={"/emergencyfund"}
+              />
               <Module
                 num={"3"}
                 name={"Debt management"}
                 icon={<BsCreditCard />}
+                path={"/debt"}
               />
-              <Module num={"4"} name={"Goal funding"} icon={<GiPiggyBank />} />
+              <Module
+                num={"4"}
+                name={"Goal funding"}
+                icon={<GiPiggyBank />}
+                path={"/goals"}
+              />
             </ModulesWrapper>
           </Wrapper>
         </>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { COLORS, SIZE, BREAK } from "../../constants";
@@ -9,14 +10,14 @@ import { FiCheckCircle } from "react-icons/fi";
 const description = {
   "1": "Learn how you can apply the 50/30/20 rule to ensure you stay on track.",
   "2":
-    "How much do you need to set aside for a rainy day? Find out some best practices to weather any storm.",
+    "How much do you need to set aside for unexpected expenses or events? Find out some best practices to weather any storm.",
   "3":
     "Using credit responsibly has some perks, like building your credit score or taking advantage of cash-back/rewards programs. But how much is too much?",
   "4":
     "Setting clear goals not only helps to keep track of your progress, but can also help motivate you to work smarter towards achieving them.",
 };
 
-const Module = ({ num, name, icon }) => {
+const Module = ({ num, name, icon, path }) => {
   return (
     <Wrapper>
       <Heading>
@@ -36,7 +37,9 @@ const Module = ({ num, name, icon }) => {
       </Heading>
       <Description>{description[num]}</Description>
       <ModuleFooter>
-        <StartButton>Start module</StartButton>
+        <UnstyledLink to={path}>
+          <VisitButton>Visit module</VisitButton>
+        </UnstyledLink>
         <StatusWrapper>
           <FiCheckCircle color={COLORS.GREEN} />
           <Status>Completed</Status>
@@ -111,8 +114,13 @@ const ModuleFooter = styled.div`
   align-items: center;
 `;
 
-const StartButton = styled(Button)`
+const UnstyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
+const VisitButton = styled(Button)`
   font-size: ${SIZE.helper};
+  font-style: none;
   font-weight: 600;
 `;
 

@@ -5,6 +5,7 @@ export const UserContext = React.createContext(null);
 
 export const UserProvider = ({ children }) => {
   const [status, setStatus] = useState("loading");
+  const [id, setId] = useState();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
 
@@ -22,6 +23,7 @@ export const UserProvider = ({ children }) => {
       .then((json) => {
         if (json.status === 200) {
           const { _id, name, email } = json.user;
+          setId(_id);
           setName(name);
           setEmail(email);
           setStatus("idle");
@@ -46,7 +48,7 @@ export const UserProvider = ({ children }) => {
   }
 
   return (
-    <UserContext.Provider value={{ status, name, email, getUser, logOut }}>
+    <UserContext.Provider value={{ status, id, name, email, getUser, logOut }}>
       {children}
     </UserContext.Provider>
   );
