@@ -8,7 +8,7 @@ const options = {
   useUnifiedTopology: true,
 };
 
-const handleUser = async (req, res) => {
+const handleModules = async (req, res) => {
   // deconstruct req.body
   const { _id } = req.body;
 
@@ -29,8 +29,8 @@ const handleUser = async (req, res) => {
       .findOne({ _id: ObjectId(_id) }, (err, user) => {
         if (err) console.log(err);
         if (user) {
-          const { _id, name, email } = user;
-          res.status(200).json({ status: 200, user: { _id, name, email } });
+          const { modules } = user;
+          res.status(200).json({ status: 200, modules: modules });
         } else {
           res
             .status(404)
@@ -46,4 +46,4 @@ const handleUser = async (req, res) => {
   console.log("Disconnected!");
 };
 
-module.exports = { handleUser };
+module.exports = { handleModules };

@@ -5,6 +5,7 @@ export const UserContext = React.createContext(null);
 
 export const UserProvider = ({ children }) => {
   const [status, setStatus] = useState("loading");
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
   const [id, setId] = useState();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -38,6 +39,7 @@ export const UserProvider = ({ children }) => {
     setName();
     setEmail();
     setTokens();
+    setIsLoggedOut(true);
   };
 
   if (name === undefined) {
@@ -48,7 +50,18 @@ export const UserProvider = ({ children }) => {
   }
 
   return (
-    <UserContext.Provider value={{ status, id, name, email, getUser, logOut }}>
+    <UserContext.Provider
+      value={{
+        status,
+        id,
+        name,
+        email,
+        getUser,
+        isLoggedOut,
+        setIsLoggedOut,
+        logOut,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 
 import { AuthContext } from "../../context/AuthContext";
 import { UserContext } from "../../context/UserContext";
+import { CashFlowContext } from "../../context/CashFlowContext";
 
 import { COLORS, SIZE } from "../../../constants";
 import Header from "../../header";
@@ -15,6 +16,25 @@ import { BsSquareFill } from "react-icons/bs";
 const CashFlow = () => {
   const { authTokens } = React.useContext(AuthContext);
   const { status, name } = React.useContext(UserContext);
+  const {
+    score,
+    income,
+    totalNeeds,
+    totalWants,
+    totalSavings,
+  } = React.useContext(CashFlowContext);
+
+  const [scoreMessage, setScoreMessage] = useState("");
+
+  useEffect(() => {
+    if (score) {
+      if (score === 100) setScoreMessage("Excellent!");
+      else if (score === 90) setScoreMessage("Very good!");
+      else if (score === 80) setScoreMessage("Good");
+      else if (score === 70) setScoreMessage("Adequate");
+      else if (score < 70) setScoreMessage("Needs attention");
+    }
+  }, [score]);
 
   return (
     <>
@@ -28,8 +48,10 @@ const CashFlow = () => {
             <PageHeading>
               <ScoreWrapper>
                 <p>Cash flow score (?)</p>
-                <WvScore>80%</WvScore>
-                <ScoreHelper>Very good!</ScoreHelper>
+                <Score>
+                  {score ? `${score}%` : <Pending>Pending</Pending>}
+                </Score>
+                <ScoreHelper>{scoreMessage}</ScoreHelper>
               </ScoreWrapper>
               <Title>
                 <p>Module 1</p>
@@ -55,9 +77,21 @@ const CashFlow = () => {
                 <GaugeWrapper>
                   <Outside>
                     <Inside>
-                      <Needs percent={50}></Needs>
-                      <Wants percent={30}></Wants>
-                      <Savings percent={20}></Savings>
+                      <Needs
+                        percent={score && `${(totalNeeds / income) * 100}`}
+                      >
+                        {score && `${(totalNeeds / income) * 100}`}
+                      </Needs>
+                      <Wants
+                        percent={score && `${(totalWants / income) * 100}`}
+                      >
+                        {score && `${(totalWants / income) * 100}`}
+                      </Wants>
+                      <Savings
+                        percent={score && `${(totalSavings / income) * 100}`}
+                      >
+                        {score && `${(totalSavings / income) * 100}`}
+                      </Savings>
                     </Inside>
                   </Outside>
                   <GaugeLabel>My cash flow</GaugeLabel>
@@ -65,9 +99,9 @@ const CashFlow = () => {
                 <GaugeWrapper>
                   <Outside>
                     <Inside>
-                      <Needs percent={50}></Needs>
-                      <Wants percent={30}></Wants>
-                      <Savings percent={20}></Savings>
+                      <Needs percent={50}>50</Needs>
+                      <Wants percent={30}>30</Wants>
+                      <Savings percent={20}>20</Savings>
                     </Inside>
                   </Outside>
                   <GaugeLabel>50/30/20 Rule</GaugeLabel>
@@ -106,10 +140,15 @@ const PageHeading = styled.div`
 
 const ScoreWrapper = styled.div`
   width: 33%;
+  text-align: center;
 `;
 
-const WvScore = styled.p`
-  font-size: 3em;
+const Score = styled.p`
+  font-size: 2.5em;
+`;
+
+const Pending = styled.span`
+  font-size: 0.8em;
 `;
 
 const ScoreHelper = styled.p`
@@ -175,19 +214,30 @@ const Inside = styled.div`
   border: 1px solid ${COLORS.PRIMARY_TEXT};
   border-radius: 20px;
   overflow: hidden;
+  color: #fff;
+  font-weight: 600;
 `;
 
 const Needs = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: ${(prop) => prop.percent}%;
   background-color: #c3adf5;
 `;
 
 const Wants = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: ${(prop) => prop.percent}%;
   background-color: #9770ed;
 `;
 
 const Savings = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: ${(prop) => prop.percent}%;
   background-color: ${COLORS.THEME};
 `;

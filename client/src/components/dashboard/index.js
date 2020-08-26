@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import { AuthContext } from "../context/AuthContext";
 import { UserContext } from "../context/UserContext";
+import { CashFlowContext } from "../context/CashFlowContext";
 
 import { COLORS, SIZE } from "../../constants";
 import Header from "../header";
@@ -16,6 +17,9 @@ import { BsCreditCard } from "react-icons/bs";
 const Dashboard = () => {
   const { authTokens } = React.useContext(AuthContext);
   const { status, name } = React.useContext(UserContext);
+  const { cashFlowStatus, isComplete, score } = React.useContext(
+    CashFlowContext
+  );
 
   return (
     <>
@@ -40,6 +44,8 @@ const Dashboard = () => {
                 name={"Cash flow"}
                 icon={<GiReceiveMoney />}
                 path={"/cashflow"}
+                isCompleted={isComplete}
+                score={score}
               />
               <Module
                 num={"2"}

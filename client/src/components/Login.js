@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import { AuthContext } from "./context/AuthContext";
 import { UserContext } from "./context/UserContext";
+import { CashFlowContext } from "./context/CashFlowContext";
 
 import { COLORS } from "../constants";
 import Logo from "./Logo";
@@ -12,6 +13,7 @@ import LoginButton from "./buttons/PrimaryButton";
 const Login = () => {
   const { authTokens, setTokens } = useContext(AuthContext);
   const { getUser } = useContext(UserContext);
+  const { getCashFlow } = useContext(CashFlowContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,6 +34,7 @@ const Login = () => {
       .then((json) => {
         if (json.status === 200) {
           getUser(json.user._id);
+          getCashFlow(json.user._id);
           setTokens(json.user._id);
         } else {
           setError(json.message);

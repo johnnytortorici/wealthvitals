@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { COLORS, SIZE, BREAK } from "../../constants";
 import Button from "../buttons/SecondaryButton";
 
-import { FiCheckCircle } from "react-icons/fi";
+import { FiCircle, FiCheckCircle } from "react-icons/fi";
 
 const description = {
   "1": "Learn how you can apply the 50/30/20 rule to ensure you stay on track.",
@@ -17,7 +17,7 @@ const description = {
     "Setting clear goals not only helps to keep track of your progress, but can also help motivate you to work smarter towards achieving them.",
 };
 
-const Module = ({ num, name, icon, path }) => {
+const Module = ({ num, name, icon, path, isCompleted, score }) => {
   return (
     <Wrapper>
       <Heading>
@@ -32,7 +32,7 @@ const Module = ({ num, name, icon, path }) => {
         </NameIcon>
         <ScoreWrapper>
           <Label>Module Score</Label>
-          <Score>80%</Score>
+          <Score>{score ? `${score}%` : <Pending>Pending</Pending>}</Score>
         </ScoreWrapper>
       </Heading>
       <Description>{description[num]}</Description>
@@ -41,8 +41,12 @@ const Module = ({ num, name, icon, path }) => {
           <VisitButton>Visit module</VisitButton>
         </UnstyledLink>
         <StatusWrapper>
-          <FiCheckCircle color={COLORS.GREEN} />
-          <Status>Completed</Status>
+          {isCompleted && (
+            <>
+              <FiCheckCircle color={COLORS.GREEN} />
+              <Status>Completed</Status>
+            </>
+          )}
         </StatusWrapper>
       </ModuleFooter>
     </Wrapper>
@@ -101,6 +105,10 @@ const Label = styled.p`
 const Score = styled.p`
   font-size: 1.8em;
   font-weight: 600;
+`;
+
+const Pending = styled.span`
+  font-size: 0.8em;
 `;
 
 const Description = styled.p`

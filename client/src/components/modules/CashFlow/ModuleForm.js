@@ -1,105 +1,36 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 
-import { UserContext } from "../../context/UserContext";
+import { CashFlowContext } from "../../context/CashFlowContext";
 
-import { COLORS } from "../../../constants";
+import { COLORS, SIZE } from "../../../constants";
 import Button from "../../buttons/PrimaryButton";
 
 const ModuleForm = () => {
-  const { id } = useContext(UserContext);
-  const [error, setError] = useState("");
-
-  // INCOME
-  const [income, setIncome] = useState("");
-
-  // NEEDS
-  const [housing, setHousing] = useState("");
-  const [utilities, setUtilities] = useState("");
-  const [groceries, setGroceries] = useState("");
-  const [transport, setTransport] = useState("");
-  const [healthcare, setHealthcare] = useState("");
-  const [debtMinimum, setDebtMinimum] = useState("");
-  const needs = [
-    housing,
-    utilities,
-    groceries,
-    transport,
-    healthcare,
-    debtMinimum,
-  ];
-
-  // WANTS
-  const [entertainment, setEntertainment] = useState("");
-  const [dining, setDining] = useState("");
-  const [shopping, setShopping] = useState("");
-  const [gifts, setGifts] = useState("");
-  const wants = [entertainment, dining, shopping, gifts];
-
-  // SAVINGS
-  const [emergency, setEmergency] = useState("");
-  const [saving, setSaving] = useState("");
-  const [debtRepayment, setDebtRepayment] = useState("");
-  const savings = [emergency, saving, debtRepayment];
-
-  // TOTALS
-  const [totalNeeds, setTotalNeeds] = useState("");
-  const [totalWants, setTotalWants] = useState("");
-  const [totalSavings, setTotalSavings] = useState("");
-
-  useEffect(() => {
-    setTotalNeeds(0);
-    needs.forEach((need) => {
-      need === undefined && (need = 0);
-      setTotalNeeds((totalNeeds) => totalNeeds + Number(need));
-    });
-  }, [housing, utilities, groceries, transport, healthcare, debtMinimum]);
-
-  useEffect(() => {
-    setTotalWants(0);
-    wants.forEach((want) => {
-      want === undefined && (want = 0);
-      setTotalWants((totalWants) => totalWants + Number(want));
-    });
-  }, [entertainment, dining, shopping, gifts]);
-
-  useEffect(() => {
-    setTotalSavings(0);
-    savings.forEach((saving) => {
-      saving === undefined && (saving = 0);
-      setTotalSavings((totalSavings) => totalSavings + Number(saving));
-    });
-  }, [emergency, saving, debtRepayment]);
-
-  const handleCalculate = (ev) => {
-    ev.preventDefault();
-
-    fetch("/cashflow", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: id,
-        needs: needs,
-        wants: wants,
-        savings: savings,
-      }),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.status === 200) {
-        } else {
-          setError(json.message);
-          console.log(json);
-        }
-      });
-  };
+  const {
+    cashFlowStatus,
+    isComplete,
+    handleCalculate,
+    score,
+    income,
+    setIncome,
+    needs,
+    setNeeds,
+    wants,
+    setWants,
+    savings,
+    setSavings,
+    totalNeeds,
+    totalWants,
+    totalSavings,
+    reconcile,
+  } = useContext(CashFlowContext);
 
   return (
     <Wrapper>
       <Form onSubmit={(ev) => handleCalculate(ev)}>
         <Heading>Monthly budget</Heading>
+        <Tip>*Tip: Income should be equal to Needs + Wants + Savings</Tip>
         <Categories>Income</Categories>
         <FormItem>
           <Label htmlFor="income">After-tax Income (Net)</Label>
@@ -123,8 +54,8 @@ const ModuleForm = () => {
             <Input
               type="number"
               id="housing"
-              value={housing}
-              onChange={(ev) => setHousing(ev.currentTarget.value)}
+              value={needs.housing}
+              onChange={(ev) => setNeeds.setHousing(ev.currentTarget.value)}
             />
           </div>
         </FormItem>
@@ -135,8 +66,8 @@ const ModuleForm = () => {
             <Input
               type="number"
               id="utilities"
-              value={utilities}
-              onChange={(ev) => setUtilities(ev.currentTarget.value)}
+              value={needs.utilities}
+              onChange={(ev) => setNeeds.setUtilities(ev.currentTarget.value)}
             />
           </div>
         </FormItem>
@@ -147,8 +78,8 @@ const ModuleForm = () => {
             <Input
               type="number"
               id="groceries"
-              value={groceries}
-              onChange={(ev) => setGroceries(ev.currentTarget.value)}
+              value={needs.groceries}
+              onChange={(ev) => setNeeds.setGroceries(ev.currentTarget.value)}
             />
           </div>
         </FormItem>
@@ -159,8 +90,8 @@ const ModuleForm = () => {
             <Input
               type="number"
               id="transport"
-              value={transport}
-              onChange={(ev) => setTransport(ev.currentTarget.value)}
+              value={needs.transport}
+              onChange={(ev) => setNeeds.setTransport(ev.currentTarget.value)}
             />
           </div>
         </FormItem>
@@ -171,8 +102,8 @@ const ModuleForm = () => {
             <Input
               type="number"
               id="healthcare"
-              value={healthcare}
-              onChange={(ev) => setHealthcare(ev.currentTarget.value)}
+              value={needs.healthcare}
+              onChange={(ev) => setNeeds.setHealthcare(ev.currentTarget.value)}
             />
           </div>
         </FormItem>
@@ -183,8 +114,8 @@ const ModuleForm = () => {
             <Input
               type="number"
               id="debtMinimum"
-              value={debtMinimum}
-              onChange={(ev) => setDebtMinimum(ev.currentTarget.value)}
+              value={needs.debtMinimum}
+              onChange={(ev) => setNeeds.setDebtMinimum(ev.currentTarget.value)}
             />
           </div>
         </FormItem>
@@ -201,8 +132,10 @@ const ModuleForm = () => {
             <Input
               type="number"
               id="entertainment"
-              value={entertainment}
-              onChange={(ev) => setEntertainment(ev.currentTarget.value)}
+              value={wants.entertainment}
+              onChange={(ev) =>
+                setWants.setEntertainment(ev.currentTarget.value)
+              }
             />
           </div>
         </FormItem>
@@ -213,8 +146,8 @@ const ModuleForm = () => {
             <Input
               type="number"
               id="dining"
-              value={dining}
-              onChange={(ev) => setDining(ev.currentTarget.value)}
+              value={wants.dining}
+              onChange={(ev) => setWants.setDining(ev.currentTarget.value)}
             />
           </div>
         </FormItem>
@@ -225,8 +158,8 @@ const ModuleForm = () => {
             <Input
               type="number"
               id="shopping"
-              value={shopping}
-              onChange={(ev) => setShopping(ev.currentTarget.value)}
+              value={wants.shopping}
+              onChange={(ev) => setWants.setShopping(ev.currentTarget.value)}
             />
           </div>
         </FormItem>
@@ -237,8 +170,8 @@ const ModuleForm = () => {
             <Input
               type="number"
               id="gifts"
-              value={gifts}
-              onChange={(ev) => setGifts(ev.currentTarget.value)}
+              value={wants.gifts}
+              onChange={(ev) => setWants.setGifts(ev.currentTarget.value)}
             />
           </div>
         </FormItem>
@@ -255,8 +188,8 @@ const ModuleForm = () => {
             <Input
               type="number"
               id="emergency"
-              value={emergency}
-              onChange={(ev) => setEmergency(ev.currentTarget.value)}
+              value={savings.emergency}
+              onChange={(ev) => setSavings.setEmergency(ev.currentTarget.value)}
             />
           </div>
         </FormItem>
@@ -267,8 +200,8 @@ const ModuleForm = () => {
             <Input
               type="number"
               id="saving"
-              value={saving}
-              onChange={(ev) => setSaving(ev.currentTarget.value)}
+              value={savings.saving}
+              onChange={(ev) => setSavings.setSaving(ev.currentTarget.value)}
             />
           </div>
         </FormItem>
@@ -279,8 +212,10 @@ const ModuleForm = () => {
             <Input
               type="number"
               id="debtRepayment"
-              value={debtRepayment}
-              onChange={(ev) => setDebtRepayment(ev.currentTarget.value)}
+              value={savings.debtRepayment}
+              onChange={(ev) =>
+                setSavings.setDebtRepayment(ev.currentTarget.value)
+              }
             />
           </div>
         </FormItem>
@@ -288,8 +223,28 @@ const ModuleForm = () => {
           <Total>Total Savings</Total>
           <p>= ${totalSavings.toLocaleString("en-CA")}</p>
         </FormItem>
+        <Divider />
+        <FormItem></FormItem>
+        <ReconcileHelper>
+          {reconcile === 0 ? (
+            <Status color={COLORS.THEME}>Balanced budget!</Status>
+          ) : reconcile > 0 ? (
+            <Status color={COLORS.ORANGE}>
+              ${Math.abs(reconcile).toLocaleString("en-CA")} Left to budget.
+            </Status>
+          ) : (
+            <Status color={COLORS.ORANGE}>
+              ${Math.abs(reconcile).toLocaleString("en-CA")} Over budget.
+            </Status>
+          )}
+        </ReconcileHelper>
         <ButtonWrapper>
-          <CalculateButton type="submit">Calculate Score</CalculateButton>
+          <CalculateButton
+            type="submit"
+            disabled={reconcile !== 0 ? true : false}
+          >
+            {!isComplete ? "Calculate Score" : "Update Score"}
+          </CalculateButton>
         </ButtonWrapper>
       </Form>
     </Wrapper>
@@ -308,7 +263,13 @@ const Form = styled.form`
 
 const Heading = styled.h2`
   text-align: center;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
+`;
+
+const Tip = styled.p`
+  padding-bottom: 20px;
+  text-align: center;
+  font-size: ${SIZE.HELPER};
 `;
 
 const FormItem = styled.div`
@@ -344,6 +305,21 @@ const ButtonWrapper = styled.div`
   padding-top: 20px;
 `;
 
-const CalculateButton = styled(Button)``;
+const ReconcileHelper = styled.div`
+  text-align: right;
+  font-weight: 600;
+  padding-top: 20px;
+`;
+
+const Status = styled.p`
+  color: ${(prop) => prop.color};
+`;
+
+const CalculateButton = styled(Button)`
+  &:disabled {
+    cursor: not-allowed;
+    background-color: ${COLORS.PRIMARY_TEXT};
+  }
+`;
 
 export default ModuleForm;

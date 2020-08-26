@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { UserProvider } from "./context/UserContext";
+import { CashFlowProvider } from "./context/CashFlowContext";
 import GlobalStyles from "./GlobalStyles";
 
 import Login from "./Login";
@@ -13,23 +14,25 @@ function App() {
   return (
     <AuthProvider>
       <UserProvider>
-        <GlobalStyles />
-        <Router>
-          <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/signup">
-              <SignUp />
-            </Route>
-            <Route path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route path="/cashflow">
-              <CashFlow />
-            </Route>
-          </Switch>
-        </Router>
+        <CashFlowProvider>
+          <GlobalStyles />
+          <Router>
+            <Switch>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route path="/signup">
+                <SignUp />
+              </Route>
+              <Route path="/dashboard">
+                <Dashboard />
+              </Route>
+              <Route path="/cashflow">
+                <CashFlow />
+              </Route>
+            </Switch>
+          </Router>
+        </CashFlowProvider>
       </UserProvider>
     </AuthProvider>
   );

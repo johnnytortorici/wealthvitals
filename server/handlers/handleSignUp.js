@@ -28,7 +28,17 @@ const handleSignUp = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // insert new user into the users collection
-    const newUser = { name, email, hashedPassword };
+    const newUser = {
+      name,
+      email,
+      hashedPassword,
+      modules: {
+        cashflow: { isComplete: false },
+        emergencyfund: { isComplete: false },
+        debt: { isComplete: false },
+        goals: { isComplete: false },
+      },
+    };
     await db.collection("users").insertOne(newUser, (err) => {
       if (err) console.log(err);
       else {
