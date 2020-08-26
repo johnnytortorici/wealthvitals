@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { AuthContext } from "../context/AuthContext";
 import { UserContext } from "../context/UserContext";
 import { CashFlowContext } from "../context/CashFlowContext";
+import { EmergencyFundContext } from "../context/EmergencyFundContext";
 
 import { COLORS, SIZE } from "../../constants";
 import Header from "../header";
@@ -17,9 +18,16 @@ import { BsCreditCard } from "react-icons/bs";
 const Dashboard = () => {
   const { authTokens } = React.useContext(AuthContext);
   const { status, name } = React.useContext(UserContext);
-  const { cashFlowStatus, isComplete, score } = React.useContext(
-    CashFlowContext
-  );
+  const {
+    cashFlowStatus,
+    cashFlowIsComplete,
+    cashFlowScore,
+  } = React.useContext(CashFlowContext);
+  const {
+    emergencyFundStatus,
+    emergencyFundIsComplete,
+    emergencyFundScore,
+  } = React.useContext(EmergencyFundContext);
 
   return (
     <>
@@ -44,14 +52,16 @@ const Dashboard = () => {
                 name={"Cash flow"}
                 icon={<GiReceiveMoney />}
                 path={"/cashflow"}
-                isCompleted={isComplete}
-                score={score}
+                isCompleted={cashFlowIsComplete}
+                score={cashFlowScore}
               />
               <Module
                 num={"2"}
                 name={"Emergency fund"}
                 icon={<GiUmbrella />}
                 path={"/emergencyfund"}
+                isCompleted={emergencyFundIsComplete}
+                score={emergencyFundScore}
               />
               <Module
                 num={"3"}

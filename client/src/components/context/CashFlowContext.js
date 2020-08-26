@@ -248,9 +248,9 @@ export const CashFlowProvider = ({ children }) => {
     <CashFlowContext.Provider
       value={{
         cashFlowStatus: status,
-        isComplete,
+        cashFlowIsComplete: isComplete,
         handleCalculate,
-        score,
+        cashFlowScore: score,
         income,
         setIncome,
         needs,

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { AuthContext } from "./context/AuthContext";
 import { UserContext } from "./context/UserContext";
 import { CashFlowContext } from "./context/CashFlowContext";
+import { EmergencyFundContext } from "./context/EmergencyFundContext";
 
 import { COLORS } from "../constants";
 import Logo from "./Logo";
@@ -14,6 +15,7 @@ const Login = () => {
   const { authTokens, setTokens } = useContext(AuthContext);
   const { getUser } = useContext(UserContext);
   const { getCashFlow } = useContext(CashFlowContext);
+  const { getEmergencyFund } = useContext(EmergencyFundContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,6 +37,7 @@ const Login = () => {
         if (json.status === 200) {
           getUser(json.user._id);
           getCashFlow(json.user._id);
+          getEmergencyFund(json.user._id);
           setTokens(json.user._id);
         } else {
           setError(json.message);

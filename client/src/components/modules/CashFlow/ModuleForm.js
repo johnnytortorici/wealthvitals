@@ -9,7 +9,7 @@ import Button from "../../buttons/PrimaryButton";
 const ModuleForm = () => {
   const {
     cashFlowStatus,
-    isComplete,
+    cashFlowIsComplete,
     handleCalculate,
     score,
     income,
@@ -243,7 +243,7 @@ const ModuleForm = () => {
             type="submit"
             disabled={reconcile !== 0 ? true : false}
           >
-            {!isComplete ? "Calculate Score" : "Update Score"}
+            {!cashFlowIsComplete ? "Calculate Score" : "Update Score"}
           </CalculateButton>
         </ButtonWrapper>
       </Form>

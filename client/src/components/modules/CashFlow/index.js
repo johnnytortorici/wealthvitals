@@ -17,7 +17,7 @@ const CashFlow = () => {
   const { authTokens } = React.useContext(AuthContext);
   const { status, name } = React.useContext(UserContext);
   const {
-    score,
+    cashFlowScore,
     income,
     totalNeeds,
     totalWants,
@@ -27,14 +27,14 @@ const CashFlow = () => {
   const [scoreMessage, setScoreMessage] = useState("");
 
   useEffect(() => {
-    if (score) {
-      if (score === 100) setScoreMessage("Excellent!");
-      else if (score === 90) setScoreMessage("Very good!");
-      else if (score === 80) setScoreMessage("Good");
-      else if (score === 70) setScoreMessage("Adequate");
-      else if (score < 70) setScoreMessage("Needs attention");
+    if (cashFlowScore) {
+      if (cashFlowScore === 100) setScoreMessage("Excellent!");
+      else if (cashFlowScore === 90) setScoreMessage("Very good!");
+      else if (cashFlowScore === 80) setScoreMessage("Good");
+      else if (cashFlowScore === 70) setScoreMessage("Adequate");
+      else if (cashFlowScore < 70) setScoreMessage("Needs attention");
     }
-  }, [score]);
+  }, [cashFlowScore]);
 
   return (
     <>
@@ -49,7 +49,11 @@ const CashFlow = () => {
               <ScoreWrapper>
                 <p>Cash flow score (?)</p>
                 <Score>
-                  {score ? `${score}%` : <Pending>Pending</Pending>}
+                  {cashFlowScore ? (
+                    `${cashFlowScore}%`
+                  ) : (
+                    <Pending>Pending</Pending>
+                  )}
                 </Score>
                 <ScoreHelper>{scoreMessage}</ScoreHelper>
               </ScoreWrapper>
@@ -78,19 +82,25 @@ const CashFlow = () => {
                   <Outside>
                     <Inside>
                       <Needs
-                        percent={score && `${(totalNeeds / income) * 100}`}
+                        percent={
+                          income !== "" ? `${(totalNeeds / income) * 100}` : 0
+                        }
                       >
-                        {score && `${(totalNeeds / income) * 100}`}
+                        {income !== "" ? `${(totalNeeds / income) * 100}` : 0}
                       </Needs>
                       <Wants
-                        percent={score && `${(totalWants / income) * 100}`}
+                        percent={
+                          income !== "" ? `${(totalWants / income) * 100}` : 0
+                        }
                       >
-                        {score && `${(totalWants / income) * 100}`}
+                        {income !== "" ? `${(totalWants / income) * 100}` : 0}
                       </Wants>
                       <Savings
-                        percent={score && `${(totalSavings / income) * 100}`}
+                        percent={
+                          income !== "" ? `${(totalSavings / income) * 100}` : 0
+                        }
                       >
-                        {score && `${(totalSavings / income) * 100}`}
+                        {income !== "" ? `${(totalSavings / income) * 100}` : 0}
                       </Savings>
                     </Inside>
                   </Outside>
@@ -205,7 +215,7 @@ const Outside = styled.div`
   height: 300px;
   width: 75px;
   background-color: #fff;
-  border: 1px solid ${COLORS.PRIMARY_TEXT};
+  border: 1px solid ${COLORS.BORDER};
   border-radius: 10px;
 `;
 const Inside = styled.div`
