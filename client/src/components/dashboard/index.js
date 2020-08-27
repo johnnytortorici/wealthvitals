@@ -10,6 +10,7 @@ import { EmergencyFundContext } from "../context/EmergencyFundContext";
 import { SIZE } from "../../constants";
 import Header from "../header";
 import Loading from "../Loading";
+import Score from "../Score";
 import Module from "./Module";
 
 import { GiReceiveMoney, GiUmbrella, GiPiggyBank } from "react-icons/gi";
@@ -39,11 +40,11 @@ const Dashboard = () => {
           <Header />
           <Wrapper>
             <PageHeading>
-              <ScoreWrapper>
-                <p>Wealthvitals score (?)</p>
-                <WvScore>80%</WvScore>
-                <ScoreHelper>Very good!</ScoreHelper>
-              </ScoreWrapper>
+              <Score
+                title={"Wealthvitals"}
+                score={80}
+                scoreMessage={"Very good!"}
+              />
               <Title>My Financial Plan (?)</Title>
             </PageHeading>
             <ModulesWrapper>
@@ -90,18 +91,6 @@ const Wrapper = styled.div`
 const PageHeading = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const ScoreWrapper = styled.div`
-  width: 33%;
-`;
-
-const WvScore = styled.p`
-  font-size: 3em;
-`;
-
-const ScoreHelper = styled.p`
-  font-size: ${SIZE.HELPER};
 `;
 
 const Title = styled.h1`
