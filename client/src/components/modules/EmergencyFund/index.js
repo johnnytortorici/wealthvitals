@@ -6,10 +6,10 @@ import { AuthContext } from "../../context/AuthContext";
 import { UserContext } from "../../context/UserContext";
 import { EmergencyFundContext } from "../../context/EmergencyFundContext";
 
-import { COLORS } from "../../../constants";
 import Header from "../../header";
 import Loading from "../../Loading";
-import Score from "../../Score";
+import ModuleHeading from "../ModuleHeading";
+import ProTip from "../ProTip";
 import Chart from "./Chart";
 import ModuleForm from "./ModuleForm";
 
@@ -26,28 +26,23 @@ const EmergencyFund = () => {
     totalEmergencyFund,
   } = React.useContext(EmergencyFundContext);
 
-  const [scoreMessage, setScoreMessage] = useState("");
   const [proTip, setProTip] = useState("");
 
   useEffect(() => {
     if (emergencyFundScore) {
       if (emergencyFundScore === 100) {
-        setScoreMessage("Excellent!");
         setProTip(
           "You have exceeded the recommended emergency fund based on your income."
         );
       } else if (emergencyFundScore === 80) {
-        setScoreMessage("Very good!");
         setProTip(
           "You have met the minimum recommended emergency fund based on your income."
         );
       } else if (emergencyFundScore === 70) {
-        setScoreMessage("Good");
         setProTip(
           "You are more than half way there. Try saving a little extra every week to ensure you have at least 3 months of income in your emergency fund. Ex: $5 per day will add up to over $900 in 6 months."
         );
       } else if (emergencyFundScore < 70) {
-        setScoreMessage("Needs attention");
         setProTip(
           "Building a safety net for the unexpected is one of the most important ways to protect your wealth. Try saving a little extra every week to ensure you have at least 3 months of income in your emergency fund. Ex: $5 per day will add up to over $900 in 6 months."
         );
@@ -64,27 +59,12 @@ const EmergencyFund = () => {
         <>
           <Header />
           <Wrapper>
-            <PageHeading>
-              <Score
-                title={"Emergency fund"}
-                score={emergencyFundScore}
-                scoreMessage={scoreMessage}
-              />
-              <Title>
-                <p>Module 2</p>
-                <h1>Emergency fund</h1>
-              </Title>
-            </PageHeading>
-            {emergencyFundScore && (
-              <Status>
-                <FiCheckCircle color={COLORS.GREEN} /> Completed
-              </Status>
-            )}
-            {emergencyFundScore && (
-              <ProTip>
-                <u>Pro tip:</u> {proTip}
-              </ProTip>
-            )}
+            <ModuleHeading
+              title={"Emergency fund"}
+              moduleNum={"2"}
+              score={emergencyFundScore}
+            />
+            <ProTip score={emergencyFundScore} proTip={proTip} />
             <Chart
               income={income}
               totalEmergencyFund={totalEmergencyFund}
@@ -115,31 +95,6 @@ const EmergencyFund = () => {
 
 const Wrapper = styled.div`
   padding: 20px;
-`;
-
-const PageHeading = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Title = styled.div`
-  width: 33%;
-  text-align: center;
-`;
-
-const Status = styled.p`
-  font-size: 1.5em;
-  text-align: center;
-  padding-top: 20px;
-`;
-
-const ProTip = styled.p`
-  margin: 30px 50px 0;
-  padding: 10px;
-  border: 1px solid ${COLORS.BORDER};
-  border-radius: 10px;
-  background-color: #fff;
-  font-weight: 600;
 `;
 
 const Content = styled.div`

@@ -6,14 +6,12 @@ import { AuthContext } from "../../context/AuthContext";
 import { UserContext } from "../../context/UserContext";
 import { CashFlowContext } from "../../context/CashFlowContext";
 
-import { COLORS } from "../../../constants";
 import Header from "../../header";
 import Loading from "../../Loading";
-import Score from "../../Score";
+import ModuleHeading from "../ModuleHeading";
+import ProTip from "../ProTip";
 import Chart from "./Chart";
 import ModuleForm from "./ModuleForm";
-
-import { FiCheckCircle } from "react-icons/fi";
 
 const CashFlow = () => {
   const { authTokens } = React.useContext(AuthContext);
@@ -26,25 +24,19 @@ const CashFlow = () => {
     totalSavings,
   } = React.useContext(CashFlowContext);
 
-  const [scoreMessage, setScoreMessage] = useState("");
   const [proTip, setProTip] = useState("");
 
   useEffect(() => {
     if (cashFlowScore) {
       if (cashFlowScore === 100) {
-        setScoreMessage("Excellent!");
         setProTip("Excellent!");
       } else if (cashFlowScore === 90) {
-        setScoreMessage("Very good!");
         setProTip("Very good!");
       } else if (cashFlowScore === 80) {
-        setScoreMessage("Good");
         setProTip("Good");
       } else if (cashFlowScore === 70) {
-        setScoreMessage("Good start");
         setProTip("Good start");
       } else if (cashFlowScore < 70) {
-        setScoreMessage("Needs attention");
         setProTip("Needs attention");
       }
     }
@@ -59,27 +51,12 @@ const CashFlow = () => {
         <>
           <Header />
           <Wrapper>
-            <PageHeading>
-              <Score
-                title={"Cash flow"}
-                score={cashFlowScore}
-                scoreMessage={scoreMessage}
-              />
-              <Title>
-                <p>Module 1</p>
-                <h1>Cash flow</h1>
-              </Title>
-            </PageHeading>
-            {cashFlowScore && (
-              <Status>
-                <FiCheckCircle color={COLORS.GREEN} /> Completed
-              </Status>
-            )}
-            {cashFlowScore && (
-              <ProTip>
-                <u>Pro tip:</u> {proTip}
-              </ProTip>
-            )}
+            <ModuleHeading
+              title={"Cash flow"}
+              moduleNum={"1"}
+              score={cashFlowScore}
+            />
+            <ProTip score={cashFlowScore} proTip={proTip} />
             <Chart
               income={income}
               totalNeeds={totalNeeds}
@@ -109,31 +86,6 @@ const CashFlow = () => {
 
 const Wrapper = styled.div`
   padding: 20px;
-`;
-
-const PageHeading = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Title = styled.div`
-  width: 33%;
-  text-align: center;
-`;
-
-const Status = styled.p`
-  font-size: 1.5em;
-  text-align: center;
-  padding-top: 20px;
-`;
-
-const ProTip = styled.p`
-  margin: 30px 50px 0;
-  padding: 10px;
-  border: 1px solid ${COLORS.BORDER};
-  border-radius: 10px;
-  background-color: #fff;
-  font-weight: 600;
 `;
 
 const Content = styled.div`
