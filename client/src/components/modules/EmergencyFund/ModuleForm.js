@@ -1,9 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 import { EmergencyFundContext } from "../../context/EmergencyFundContext";
 
-import { COLORS, SIZE } from "../../../constants";
+import { COLORS } from "../../../constants";
 import Button from "../../buttons/PrimaryButton";
 
 const ModuleForm = () => {
@@ -11,7 +11,6 @@ const ModuleForm = () => {
     emergencyFundStatus,
     emergencyFundIsComplete,
     handleCalculate,
-    emergencyFundScore,
     income,
     setIncome,
     currentSavings,
@@ -93,17 +92,6 @@ const Form = styled.form`
   width: 500px;
 `;
 
-const Heading = styled.h2`
-  text-align: center;
-  padding-bottom: 20px;
-`;
-
-const Tip = styled.p`
-  padding-bottom: 20px;
-  text-align: center;
-  font-size: ${SIZE.HELPER};
-`;
-
 const FormItem = styled.div`
   display: flex;
   justify-content: space-between;
@@ -135,16 +123,6 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   padding-top: 20px;
-`;
-
-const ReconcileHelper = styled.div`
-  text-align: right;
-  font-weight: 600;
-  padding-top: 20px;
-`;
-
-const Status = styled.p`
-  color: ${(prop) => prop.color};
 `;
 
 const CalculateButton = styled(Button)`

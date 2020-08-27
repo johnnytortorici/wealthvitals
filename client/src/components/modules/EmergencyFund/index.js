@@ -11,9 +11,11 @@ import Header from "../../header";
 import Loading from "../../Loading";
 import ModuleForm from "./ModuleForm";
 
+import { FiCheckCircle } from "react-icons/fi";
+
 const EmergencyFund = () => {
   const { authTokens } = React.useContext(AuthContext);
-  const { status, name } = React.useContext(UserContext);
+  const { status } = React.useContext(UserContext);
   const {
     emergencyFundScore,
     income,
@@ -23,14 +25,31 @@ const EmergencyFund = () => {
   } = React.useContext(EmergencyFundContext);
 
   const [scoreMessage, setScoreMessage] = useState("");
+  const [proTip, setProTip] = useState("");
 
   useEffect(() => {
     if (emergencyFundScore) {
-      if (emergencyFundScore === 100) setScoreMessage("Excellent!");
-      else if (emergencyFundScore === 90) setScoreMessage("Very good!");
-      else if (emergencyFundScore === 80) setScoreMessage("Good");
-      else if (emergencyFundScore === 70) setScoreMessage("Adequate");
-      else if (emergencyFundScore < 70) setScoreMessage("Needs attention");
+      if (emergencyFundScore === 100) {
+        setScoreMessage("Excellent!");
+        setProTip(
+          "You have exceeded the recommended emergency fund based on your income."
+        );
+      } else if (emergencyFundScore === 80) {
+        setScoreMessage("Good");
+        setProTip(
+          "You have met the minimum recommended emergency fund based on your income."
+        );
+      } else if (emergencyFundScore === 70) {
+        setScoreMessage("Very close");
+        setProTip(
+          "You are more than half way there. Try saving a little extra every week to ensure you have at least 3 months of income in your emergency fund. Ex: $5 per day will add up to over $900 in 6 months."
+        );
+      } else if (emergencyFundScore < 70) {
+        setScoreMessage("Needs attention");
+        setProTip(
+          "Building a safety net for the unexpected is one of the most important ways to protect your wealth. Try saving a little extra every week to ensure you have at least 3 months of income in your emergency fund. Ex: $5 per day will add up to over $900 in 6 months."
+        );
+      }
     }
   }, [emergencyFundScore]);
 
@@ -60,6 +79,12 @@ const EmergencyFund = () => {
                 <h1>Emergency fund</h1>
               </Title>
             </PageHeading>
+            {emergencyFundScore && (
+              <Status>
+                <FiCheckCircle color={COLORS.GREEN} /> Completed
+              </Status>
+            )}
+            {emergencyFundScore && <ProTip>Pro tip: {proTip}</ProTip>}
             <Chart>
               <GaugeWrapper>
                 <Outside>
@@ -85,7 +110,7 @@ const EmergencyFund = () => {
                     <LabelThree>
                       <BarLabel>
                         <p>|</p>
-                        <p>3 Mo.</p>
+                        <p>3 Months</p>
                         <p>{income && `$${min.toLocaleString("en-CA")}`}</p>
                         <p>Min. recommended</p>
                       </BarLabel>
@@ -153,6 +178,21 @@ const ScoreHelper = styled.p`
 const Title = styled.div`
   width: 33%;
   text-align: center;
+`;
+
+const Status = styled.p`
+  font-size: 1.5em;
+  text-align: center;
+  padding-top: 20px;
+`;
+
+const ProTip = styled.p`
+  margin: 30px 50px 0;
+  padding: 10px;
+  border: 1px solid ${COLORS.BORDER};
+  border-radius: 10px;
+  background-color: #fff;
+  font-weight: 600;
 `;
 
 const Chart = styled.div`

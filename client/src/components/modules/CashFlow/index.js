@@ -12,10 +12,11 @@ import Loading from "../../Loading";
 import ModuleForm from "./ModuleForm";
 
 import { BsSquareFill } from "react-icons/bs";
+import { FiCheckCircle } from "react-icons/fi";
 
 const CashFlow = () => {
   const { authTokens } = React.useContext(AuthContext);
-  const { status, name } = React.useContext(UserContext);
+  const { status } = React.useContext(UserContext);
   const {
     cashFlowScore,
     income,
@@ -25,14 +26,26 @@ const CashFlow = () => {
   } = React.useContext(CashFlowContext);
 
   const [scoreMessage, setScoreMessage] = useState("");
+  const [proTip, setProTip] = useState("");
 
   useEffect(() => {
     if (cashFlowScore) {
-      if (cashFlowScore === 100) setScoreMessage("Excellent!");
-      else if (cashFlowScore === 90) setScoreMessage("Very good!");
-      else if (cashFlowScore === 80) setScoreMessage("Good");
-      else if (cashFlowScore === 70) setScoreMessage("Adequate");
-      else if (cashFlowScore < 70) setScoreMessage("Needs attention");
+      if (cashFlowScore === 100) {
+        setScoreMessage("Excellent!");
+        setProTip("Excellent!");
+      } else if (cashFlowScore === 90) {
+        setScoreMessage("Very good!");
+        setProTip("Very good!");
+      } else if (cashFlowScore === 80) {
+        setScoreMessage("Good");
+        setProTip("Good");
+      } else if (cashFlowScore === 70) {
+        setScoreMessage("Adequate");
+        setProTip("Adequate");
+      } else if (cashFlowScore < 70) {
+        setScoreMessage("Needs attention");
+        setProTip("Needs attention");
+      }
     }
   }, [cashFlowScore]);
 
@@ -62,6 +75,12 @@ const CashFlow = () => {
                 <h1>Cash flow</h1>
               </Title>
             </PageHeading>
+            {cashFlowScore && (
+              <Status>
+                <FiCheckCircle color={COLORS.GREEN} /> Completed
+              </Status>
+            )}
+            {cashFlowScore && <ProTip>Pro tip: {proTip}</ProTip>}
             <Chart>
               <Legend>
                 <LegendItem>
@@ -176,6 +195,21 @@ const Chart = styled.div`
   align-items: center;
 `;
 
+const Status = styled.p`
+  font-size: 1.5em;
+  text-align: center;
+  padding-top: 20px;
+`;
+
+const ProTip = styled.p`
+  margin: 30px 50px 0;
+  padding: 10px;
+  border: 1px solid ${COLORS.BORDER};
+  border-radius: 10px;
+  background-color: #fff;
+  font-weight: 600;
+`;
+
 const Legend = styled.div`
   display: flex;
   justify-content: space-between;
@@ -213,7 +247,7 @@ const GaugeLabel = styled.p`
 const Outside = styled.div`
   padding: 20px;
   height: 300px;
-  width: 75px;
+  width: 80px;
   background-color: #fff;
   border: 1px solid ${COLORS.BORDER};
   border-radius: 10px;

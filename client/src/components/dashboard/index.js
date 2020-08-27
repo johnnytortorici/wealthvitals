@@ -7,7 +7,7 @@ import { UserContext } from "../context/UserContext";
 import { CashFlowContext } from "../context/CashFlowContext";
 import { EmergencyFundContext } from "../context/EmergencyFundContext";
 
-import { COLORS, SIZE } from "../../constants";
+import { SIZE } from "../../constants";
 import Header from "../header";
 import Loading from "../Loading";
 import Module from "./Module";
@@ -17,7 +17,7 @@ import { BsCreditCard } from "react-icons/bs";
 
 const Dashboard = () => {
   const { authTokens } = React.useContext(AuthContext);
-  const { status, name } = React.useContext(UserContext);
+  const { status } = React.useContext(UserContext);
   const {
     cashFlowStatus,
     cashFlowIsComplete,

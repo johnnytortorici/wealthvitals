@@ -108,7 +108,15 @@ export const CashFlowProvider = ({ children }) => {
       need === undefined && (need = 0);
       setTotalNeeds((totalNeeds) => totalNeeds + Number(need));
     });
-  }, [housing, utilities, groceries, transport, healthcare, debtMinimum]);
+  }, [
+    housing,
+    utilities,
+    groceries,
+    transport,
+    healthcare,
+    debtMinimum,
+    needs,
+  ]);
 
   useEffect(() => {
     setTotalWants(0);
@@ -116,7 +124,7 @@ export const CashFlowProvider = ({ children }) => {
       want === undefined && (want = 0);
       setTotalWants((totalWants) => totalWants + Number(want));
     });
-  }, [entertainment, dining, shopping, gifts]);
+  }, [entertainment, dining, shopping, gifts, wants]);
 
   useEffect(() => {
     setTotalSavings(0);
@@ -124,7 +132,7 @@ export const CashFlowProvider = ({ children }) => {
       saving === undefined && (saving = 0);
       setTotalSavings((totalSavings) => totalSavings + Number(saving));
     });
-  }, [emergency, saving, debtRepayment]);
+  }, [emergency, saving, debtRepayment, savings]);
 
   useEffect(() => {
     setReconcile(income - totalNeeds - totalWants - totalSavings);
@@ -233,6 +241,7 @@ export const CashFlowProvider = ({ children }) => {
       });
       setIsLoggedOut(false);
     }
+    // eslint-disable-next-line
   }, [isLoggedOut]);
 
   useEffect(() => {
@@ -242,6 +251,7 @@ export const CashFlowProvider = ({ children }) => {
         getCashFlow(tokenId);
       }
     }
+    // eslint-disable-next-line
   }, [isComplete]);
 
   return (

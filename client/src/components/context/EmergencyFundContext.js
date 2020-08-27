@@ -126,7 +126,7 @@ export const EmergencyFundProvider = ({ children }) => {
       setMax("");
       setIsLoggedOut(false);
     }
-  }, [isLoggedOut]);
+  }, [isLoggedOut, setIsLoggedOut]);
 
   useEffect(() => {
     if (isComplete === undefined) {
@@ -135,7 +135,7 @@ export const EmergencyFundProvider = ({ children }) => {
         getEmergencyFund(tokenId);
       }
     }
-  }, [isComplete]);
+  }, [isComplete, authTokens]);
 
   return (
     <EmergencyFundContext.Provider

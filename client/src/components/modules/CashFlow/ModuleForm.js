@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 import { CashFlowContext } from "../../context/CashFlowContext";
@@ -11,7 +11,6 @@ const ModuleForm = () => {
     cashFlowStatus,
     cashFlowIsComplete,
     handleCalculate,
-    score,
     income,
     setIncome,
     needs,

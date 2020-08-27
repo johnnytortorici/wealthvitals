@@ -5,15 +5,15 @@ import styled from "styled-components";
 import { COLORS, SIZE, BREAK } from "../../constants";
 import Button from "../buttons/SecondaryButton";
 
-import { FiCircle, FiCheckCircle } from "react-icons/fi";
+import { FiCheckCircle } from "react-icons/fi";
 
 const description = {
-  "1": "Learn how you can apply the 50/30/20 rule to ensure you stay on track.",
-  "2":
+  1: "Learn how you can apply the 50/30/20 rule to ensure you stay on track.",
+  2:
     "How much do you need to set aside for unexpected expenses or events? Find out some best practices to weather any storm.",
-  "3":
+  3:
     "Using credit responsibly has some perks, like building your credit score or taking advantage of cash-back/rewards programs. But how much is too much?",
-  "4":
+  4:
     "Setting clear goals not only helps to keep track of your progress, but can also help motivate you to work smarter towards achieving them.",
 };
 
