@@ -9,6 +9,7 @@ import { CashFlowContext } from "../../context/CashFlowContext";
 import { COLORS, SIZE } from "../../../constants";
 import Header from "../../header";
 import Loading from "../../Loading";
+import Score from "../../Score";
 import ModuleForm from "./ModuleForm";
 
 import { BsSquareFill } from "react-icons/bs";
@@ -40,8 +41,8 @@ const CashFlow = () => {
         setScoreMessage("Good");
         setProTip("Good");
       } else if (cashFlowScore === 70) {
-        setScoreMessage("Adequate");
-        setProTip("Adequate");
+        setScoreMessage("Good start");
+        setProTip("Good start");
       } else if (cashFlowScore < 70) {
         setScoreMessage("Needs attention");
         setProTip("Needs attention");
@@ -59,17 +60,11 @@ const CashFlow = () => {
           <Header />
           <Wrapper>
             <PageHeading>
-              <ScoreWrapper>
-                <p>Cash flow score (?)</p>
-                <Score>
-                  {cashFlowScore ? (
-                    `${cashFlowScore}%`
-                  ) : (
-                    <Pending>Pending</Pending>
-                  )}
-                </Score>
-                <ScoreHelper>{scoreMessage}</ScoreHelper>
-              </ScoreWrapper>
+              <Score
+                title={"Cash flow"}
+                score={cashFlowScore}
+                scoreMessage={scoreMessage}
+              />
               <Title>
                 <p>Module 1</p>
                 <h1>Cash flow</h1>
@@ -80,7 +75,11 @@ const CashFlow = () => {
                 <FiCheckCircle color={COLORS.GREEN} /> Completed
               </Status>
             )}
-            {cashFlowScore && <ProTip>Pro tip: {proTip}</ProTip>}
+            {cashFlowScore && (
+              <ProTip>
+                <u>Pro tip:</u> {proTip}
+              </ProTip>
+            )}
             <Chart>
               <Legend>
                 <LegendItem>
@@ -165,23 +164,6 @@ const Wrapper = styled.div`
 const PageHeading = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const ScoreWrapper = styled.div`
-  width: 33%;
-  text-align: center;
-`;
-
-const Score = styled.p`
-  font-size: 2.5em;
-`;
-
-const Pending = styled.span`
-  font-size: 0.8em;
-`;
-
-const ScoreHelper = styled.p`
-  font-size: ${SIZE.HELPER};
 `;
 
 const Title = styled.div`

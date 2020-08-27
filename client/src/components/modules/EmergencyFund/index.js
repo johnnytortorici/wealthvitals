@@ -9,6 +9,7 @@ import { EmergencyFundContext } from "../../context/EmergencyFundContext";
 import { COLORS, SIZE } from "../../../constants";
 import Header from "../../header";
 import Loading from "../../Loading";
+import Score from "../../Score";
 import ModuleForm from "./ModuleForm";
 
 import { FiCheckCircle } from "react-icons/fi";
@@ -35,12 +36,12 @@ const EmergencyFund = () => {
           "You have exceeded the recommended emergency fund based on your income."
         );
       } else if (emergencyFundScore === 80) {
-        setScoreMessage("Good");
+        setScoreMessage("Very good!");
         setProTip(
           "You have met the minimum recommended emergency fund based on your income."
         );
       } else if (emergencyFundScore === 70) {
-        setScoreMessage("Very close");
+        setScoreMessage("Good");
         setProTip(
           "You are more than half way there. Try saving a little extra every week to ensure you have at least 3 months of income in your emergency fund. Ex: $5 per day will add up to over $900 in 6 months."
         );
@@ -63,17 +64,11 @@ const EmergencyFund = () => {
           <Header />
           <Wrapper>
             <PageHeading>
-              <ScoreWrapper>
-                <p>Emergency fund score (?)</p>
-                <Score>
-                  {emergencyFundScore ? (
-                    `${emergencyFundScore}%`
-                  ) : (
-                    <Pending>Pending</Pending>
-                  )}
-                </Score>
-                <ScoreHelper>{scoreMessage}</ScoreHelper>
-              </ScoreWrapper>
+              <Score
+                title={"Emergency fund"}
+                score={emergencyFundScore}
+                scoreMessage={scoreMessage}
+              />
               <Title>
                 <p>Module 2</p>
                 <h1>Emergency fund</h1>
@@ -84,7 +79,11 @@ const EmergencyFund = () => {
                 <FiCheckCircle color={COLORS.GREEN} /> Completed
               </Status>
             )}
-            {emergencyFundScore && <ProTip>Pro tip: {proTip}</ProTip>}
+            {emergencyFundScore && (
+              <ProTip>
+                <u>Pro tip:</u> {proTip}
+              </ProTip>
+            )}
             <Chart>
               <GaugeWrapper>
                 <Outside>
@@ -156,23 +155,6 @@ const Wrapper = styled.div`
 const PageHeading = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const ScoreWrapper = styled.div`
-  width: 33%;
-  text-align: center;
-`;
-
-const Score = styled.p`
-  font-size: 2.5em;
-`;
-
-const Pending = styled.span`
-  font-size: 0.8em;
-`;
-
-const ScoreHelper = styled.p`
-  font-size: ${SIZE.HELPER};
 `;
 
 const Title = styled.div`
