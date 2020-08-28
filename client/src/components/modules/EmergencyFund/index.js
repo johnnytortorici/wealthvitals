@@ -13,8 +13,6 @@ import ProTip from "../ProTip";
 import Chart from "./Chart";
 import ModuleForm from "./ModuleForm";
 
-import { FiCheckCircle } from "react-icons/fi";
-
 const EmergencyFund = () => {
   const { authTokens } = React.useContext(AuthContext);
   const { status } = React.useContext(UserContext);

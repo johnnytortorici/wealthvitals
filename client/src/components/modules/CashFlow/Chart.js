@@ -10,15 +10,15 @@ const Chart = ({ income, totalNeeds, totalWants, totalSavings }) => {
       <Legend>
         <LegendItem>
           <BsSquareFill color={"#c3adf5"} />
-          <LegendLabel>Needs</LegendLabel>
+          <LegendLabel>Needs (%)</LegendLabel>
         </LegendItem>
         <LegendItem>
           <BsSquareFill color={"#9770ed"} />
-          <LegendLabel>Wants</LegendLabel>
+          <LegendLabel>Wants (%)</LegendLabel>
         </LegendItem>
         <LegendItem>
           <BsSquareFill color={COLORS.THEME} />
-          <LegendLabel>Savings</LegendLabel>
+          <LegendLabel>Savings (%)</LegendLabel>
         </LegendItem>
       </Legend>
       <Guages>
@@ -69,7 +69,7 @@ const Legend = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 300px;
+  width: 400px;
   padding: 10px 0 40px;
 `;
 

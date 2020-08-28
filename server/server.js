@@ -7,6 +7,7 @@ const { handleLogin } = require("./handlers/handleLogin");
 const { handleUser } = require("./handlers/handleUser");
 const { handleCashFlow } = require("./handlers/handleCashFlow");
 const { handleEmergencyFund } = require("./handlers/handleEmergencyFund");
+const { handleDebt } = require("./handlers/handleDebt");
 const { handleModules } = require("./handlers/handleModules");
 
 app.listen(8000);
@@ -19,4 +20,5 @@ app.post("/login", handleLogin);
 app.post("/getUser", handleUser);
 app.post("/cashflow", handleCashFlow);
 app.post("/emergencyfund", handleEmergencyFund);
+app.post("/debt", handleDebt);
 app.post("/getModules", handleModules);

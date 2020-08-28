@@ -6,8 +6,8 @@ import { AuthContext } from "../context/AuthContext";
 import { UserContext } from "../context/UserContext";
 import { CashFlowContext } from "../context/CashFlowContext";
 import { EmergencyFundContext } from "../context/EmergencyFundContext";
+import { DebtContext } from "../context/DebtContext";
 
-import { SIZE } from "../../constants";
 import Header from "../header";
 import Loading from "../Loading";
 import Score from "../Score";
@@ -29,6 +29,9 @@ const Dashboard = () => {
     emergencyFundIsComplete,
     emergencyFundScore,
   } = React.useContext(EmergencyFundContext);
+  const { debtStatus, debtIsComplete, debtScore } = React.useContext(
+    DebtContext
+  );
 
   return (
     <>
@@ -69,6 +72,8 @@ const Dashboard = () => {
                 name={"Debt management"}
                 icon={<BsCreditCard />}
                 path={"/debt"}
+                isCompleted={debtIsComplete}
+                score={debtScore}
               />
               <Module
                 num={"4"}
