@@ -56,12 +56,12 @@ const EmergencyFund = () => {
       ) : (
         <>
           <Header />
+          <ModuleHeading
+            title={"Emergency fund"}
+            moduleNum={"2"}
+            score={emergencyFundScore}
+          />
           <Wrapper>
-            <ModuleHeading
-              title={"Emergency fund"}
-              moduleNum={"2"}
-              score={emergencyFundScore}
-            />
             <ProTip score={emergencyFundScore} proTip={proTip} />
             <Chart
               income={income}
@@ -92,11 +92,11 @@ const EmergencyFund = () => {
 };
 
 const Wrapper = styled.div`
-  padding: 20px;
+  padding: 0 60px;
 `;
 
 const Content = styled.div`
-  padding: 40px 40px 20px;
+  padding: 40px 0 20px;
 `;
 
 const Description = styled.p`

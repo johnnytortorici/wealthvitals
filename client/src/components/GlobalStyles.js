@@ -19,7 +19,7 @@ export default createGlobalStyle`
   a:hover {
     text-decoration: none;
   }
-  input {
+  input, select {
     padding: 4px 5px;
     font-size: 1em;
     color: ${COLORS.PRIMARY_TEXT};

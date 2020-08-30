@@ -19,8 +19,17 @@ const Header = () => {
           <NavItemLink to="/dashboard" activeClassName="selected">
             Dashboard
           </NavItemLink>
-          <NavItemLink to="/modules" activeClassName="selected">
-            Modules
+          <NavItemLink to="/cashflow" activeClassName="selected">
+            Cash flow
+          </NavItemLink>
+          <NavItemLink to="/emergencyfund" activeClassName="selected">
+            Emergency fund
+          </NavItemLink>
+          <NavItemLink to="/debt" activeClassName="selected">
+            Debt
+          </NavItemLink>
+          <NavItemLink to="/goals" activeClassName="selected">
+            Goals
           </NavItemLink>
         </Nav>
       </LogoNav>

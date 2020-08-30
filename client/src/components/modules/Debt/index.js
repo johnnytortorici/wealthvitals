@@ -42,12 +42,12 @@ const Debt = () => {
       ) : (
         <>
           <Header />
+          <ModuleHeading
+            title={"Debt management"}
+            moduleNum={"3"}
+            score={debtScore}
+          />
           <Wrapper>
-            <ModuleHeading
-              title={"Debt management"}
-              moduleNum={"3"}
-              score={debtScore}
-            />
             <ProTip score={debtScore} proTip={proTip} />
             <Chart debtRatio={debtRatio} />
             <Content>
@@ -72,11 +72,11 @@ const Debt = () => {
 };
 
 const Wrapper = styled.div`
-  padding: 20px;
+  padding: 0 60px;
 `;
 
 const Content = styled.div`
-  padding: 40px 40px 20px;
+  padding: 40px 0 20px;
 `;
 
 const Description = styled.p`

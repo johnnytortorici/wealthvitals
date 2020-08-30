@@ -36,6 +36,7 @@ const ModuleHeading = ({ title, moduleNum, score }) => {
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  padding: 20px;
 `;
 
 const Title = styled.div`

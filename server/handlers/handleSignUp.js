@@ -36,7 +36,7 @@ const handleSignUp = async (req, res) => {
         cashflow: { isComplete: false },
         emergencyfund: { isComplete: false },
         debt: { isComplete: false },
-        goals: { isComplete: false },
+        goals: { isComplete: false, small: [], medium: [], large: [] },
       },
     };
     await db.collection("users").insertOne(newUser, (err) => {

@@ -50,12 +50,12 @@ const CashFlow = () => {
       ) : (
         <>
           <Header />
+          <ModuleHeading
+            title={"Cash flow"}
+            moduleNum={"1"}
+            score={cashFlowScore}
+          />
           <Wrapper>
-            <ModuleHeading
-              title={"Cash flow"}
-              moduleNum={"1"}
-              score={cashFlowScore}
-            />
             <ProTip score={cashFlowScore} proTip={proTip} />
             <Chart
               income={income}
@@ -85,11 +85,11 @@ const CashFlow = () => {
 };
 
 const Wrapper = styled.div`
-  padding: 20px;
+  padding: 0 60px;
 `;
 
 const Content = styled.div`
-  padding: 40px 40px 20px;
+  padding: 40px 0 20px;
 `;
 
 const Description = styled.p`
