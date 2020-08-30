@@ -43,12 +43,7 @@ const Dashboard = () => {
           <Header />
           <Wrapper>
             <PageHeading>
-              <Score
-                title={"Wealthvitals"}
-                score={80}
-                scoreMessage={"Very good!"}
-              />
-              <Title>My Financial Plan (?)</Title>
+              <Title>My Financial Plan</Title>
             </PageHeading>
             <ModulesWrapper>
               <Module
@@ -80,6 +75,7 @@ const Dashboard = () => {
                 name={"Goal funding"}
                 icon={<GiPiggyBank />}
                 path={"/goals"}
+                score={false}
               />
             </ModulesWrapper>
           </Wrapper>
@@ -93,14 +89,11 @@ const Wrapper = styled.div`
   padding: 20px;
 `;
 
-const PageHeading = styled.div`
-  display: flex;
-  align-items: center;
-`;
+const PageHeading = styled.div``;
 
 const Title = styled.h1`
-  width: 33%;
   text-align: center;
+  padding: 30px;
 `;
 
 const ModulesWrapper = styled.div`

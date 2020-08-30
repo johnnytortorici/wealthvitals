@@ -95,11 +95,18 @@ export const GoalsProvider = ({ children }) => {
       .then((res) => res.json())
       .then((json) => {
         if (json.status === 200) {
-          // console.log(json);
-          // console.log(smallGoals, index);
-          type === "small" && setSmallGoals(json.smallGoals);
-          type === "medium" && setMediumGoals(json.mediumGoals);
-          type === "large" && setLargeGoals(json.largeGoals);
+          if (type === "small") {
+            setSmallGoals([]);
+            setSmallGoals(json.smallGoals);
+          }
+          if (type === "medium") {
+            setMediumGoals([]);
+            setMediumGoals(json.mediumGoals);
+          }
+          if (type === "large") {
+            setLargeGoals([]);
+            setLargeGoals(json.largeGoals);
+          }
           setStatus("idle");
         } else {
           setError(json.message);

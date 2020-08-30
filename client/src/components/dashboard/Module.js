@@ -9,12 +9,9 @@ import { FiCheckCircle } from "react-icons/fi";
 
 const description = {
   1: "Learn how you can apply the 50/30/20 rule to ensure you stay on track.",
-  2:
-    "How much do you need to set aside for unexpected expenses or events? Find out some best practices to weather any storm.",
-  3:
-    "Using credit responsibly has some perks, like building your credit score or taking advantage of cash-back/rewards programs. But how much is too much?",
-  4:
-    "Setting clear goals not only helps to keep track of your progress, but can also help motivate you to work smarter towards achieving them.",
+  2: "How much do you need to set aside for unexpected expenses or events? Find out some best practices to weather any storm.",
+  3: "Using credit responsibly has some perks, like building your credit score or taking advantage of cash-back/rewards programs. But how much is too much?",
+  4: "Setting clear goals not only helps to keep track of your progress, but can also help motivate you to work smarter towards achieving them.",
 };
 
 const Module = ({ num, name, icon, path, isCompleted, score }) => {
@@ -30,10 +27,12 @@ const Module = ({ num, name, icon, path, isCompleted, score }) => {
             </ModuleName>
           </div>
         </NameIcon>
-        <ScoreWrapper>
-          <Label>Module Score</Label>
-          <Score>{score ? `${score}%` : <Pending>Pending</Pending>}</Score>
-        </ScoreWrapper>
+        {score !== false && (
+          <ScoreWrapper>
+            <Label>Module Score</Label>
+            <Score>{score ? `${score}%` : <Pending>Pending</Pending>}</Score>
+          </ScoreWrapper>
+        )}
       </Heading>
       <Description>{description[num]}</Description>
       <ModuleFooter>
