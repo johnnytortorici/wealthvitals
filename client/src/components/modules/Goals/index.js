@@ -134,20 +134,6 @@ const Goals = () => {
               })}
             </GoalsWrapper>
           </Wrapper>
-          {/* <Content>
-              <h2>What is a debt ratio?</h2>
-              <Description>
-                If you run a quick search, you'll likely find many different
-                definitions and formulas to calculate your debt ratio. In short,
-                a debt ratio is used to help gauge whether you have a
-                sustainable amount of debt.
-              </Description>
-              <Description>
-                It doesn't matter which formula you use, as long as it helps you
-                better understand your debt situation.
-              </Description>
-              <ModuleForm />
-            </Content> */}
         </>
       )}
     </>

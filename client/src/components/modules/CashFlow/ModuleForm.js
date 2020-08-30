@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import { CashFlowContext } from "../../context/CashFlowContext";
 
 import { COLORS, SIZE } from "../../../constants";
 import Button from "../../buttons/PrimaryButton";
+
+import { FiLoader } from "react-icons/fi";
 
 const ModuleForm = () => {
   const {
@@ -240,9 +242,19 @@ const ModuleForm = () => {
         <ButtonWrapper>
           <CalculateButton
             type="submit"
-            disabled={reconcile !== 0 ? true : false}
+            disabled={
+              reconcile !== 0 || cashFlowStatus === "loading" ? true : false
+            }
           >
-            {!cashFlowIsComplete ? "Calculate Score" : "Update Score"}
+            {cashFlowStatus !== "loading" ? (
+              !cashFlowIsComplete ? (
+                "Calculate Score"
+              ) : (
+                "Update Score"
+              )
+            ) : (
+              <LoaderIcon />
+            )}
           </CalculateButton>
         </ButtonWrapper>
       </Form>
@@ -315,10 +327,22 @@ const Status = styled.p`
 `;
 
 const CalculateButton = styled(Button)`
+  width: 160px;
+
   &:disabled {
     cursor: not-allowed;
     background-color: ${COLORS.PRIMARY_TEXT};
   }
+`;
+
+const loader = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const LoaderIcon = styled(FiLoader)`
+  animation: ${loader} 2000ms infinite;
 `;
 
 export default ModuleForm;

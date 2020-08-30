@@ -143,10 +143,6 @@ const GoalItem = ({ goal, type, index }) => {
         )}
         <ActionBtn
           onClick={(ev) => {
-            // console.log(index);
-            // let copy = [...smallGoals];
-            // console.log(copy.splice(index, 1));
-            // setSmallGoals(copy);
             handleDelete(ev, index, type);
           }}
           disabled={goalsStatus === "loading"}
@@ -234,9 +230,9 @@ const ActionBtn = styled(Button)`
 
   &:disabled {
     border: none;
-    background-color: lightgrey;
+    background-color: ${COLORS.BORDER};
     cursor: not-allowed;
-    color: unset;
+    color: #fff;
   }
 `;
 

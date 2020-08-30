@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import { EmergencyFundContext } from "../../context/EmergencyFundContext";
 
 import { COLORS } from "../../../constants";
 import Button from "../../buttons/PrimaryButton";
+
+import { FiLoader } from "react-icons/fi";
 
 const ModuleForm = () => {
   const {
@@ -73,8 +75,19 @@ const ModuleForm = () => {
         </FormItem>
         <Divider />
         <ButtonWrapper>
-          <CalculateButton type="submit">
-            {!emergencyFundIsComplete ? "Calculate Score" : "Update Score"}
+          <CalculateButton
+            type="submit"
+            disabled={emergencyFundStatus === "loading" ? true : false}
+          >
+            {emergencyFundStatus !== "loading" ? (
+              !emergencyFundIsComplete ? (
+                "Calculate Score"
+              ) : (
+                "Update Score"
+              )
+            ) : (
+              <LoaderIcon />
+            )}
           </CalculateButton>
         </ButtonWrapper>
       </Form>
@@ -126,10 +139,22 @@ const ButtonWrapper = styled.div`
 `;
 
 const CalculateButton = styled(Button)`
+  width: 160px;
+
   &:disabled {
     cursor: not-allowed;
     background-color: ${COLORS.PRIMARY_TEXT};
   }
+`;
+
+const loader = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const LoaderIcon = styled(FiLoader)`
+  animation: ${loader} 2000ms infinite;
 `;
 
 export default ModuleForm;

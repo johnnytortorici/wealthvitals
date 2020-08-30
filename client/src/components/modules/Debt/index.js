@@ -16,7 +16,9 @@ import ModuleForm from "./ModuleForm";
 const Debt = () => {
   const { authTokens } = React.useContext(AuthContext);
   const { status } = React.useContext(UserContext);
-  const { debtScore, income, debtRatio } = React.useContext(DebtContext);
+  const { debtStatus, debtScore, income, debtRatio } = React.useContext(
+    DebtContext
+  );
 
   const [proTip, setProTip] = useState("");
 

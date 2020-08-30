@@ -17,6 +17,7 @@ const CashFlow = () => {
   const { authTokens } = React.useContext(AuthContext);
   const { status } = React.useContext(UserContext);
   const {
+    cashFlowStatus,
     cashFlowScore,
     income,
     totalNeeds,

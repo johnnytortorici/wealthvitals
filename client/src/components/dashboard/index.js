@@ -10,7 +10,6 @@ import { DebtContext } from "../context/DebtContext";
 
 import Header from "../header";
 import Loading from "../Loading";
-import Score from "../Score";
 import Module from "./Module";
 
 import { GiReceiveMoney, GiUmbrella, GiPiggyBank } from "react-icons/gi";
@@ -36,7 +35,10 @@ const Dashboard = () => {
   return (
     <>
       {!authTokens && <Redirect to="/login" />}
-      {status === "loading" ? (
+      {status === "loading" ||
+      cashFlowStatus === "loading" ||
+      emergencyFundStatus === "loading" ||
+      debtStatus === "loading" ? (
         <Loading />
       ) : (
         <>
