@@ -31,19 +31,34 @@ const EmergencyFund = () => {
     if (emergencyFundScore) {
       if (emergencyFundScore === 100) {
         setProTip(
-          "You have exceeded the recommended emergency fund based on your income."
+          <p>
+            You have exceeded the recommended emergency fund based on your
+            income.
+          </p>
         );
       } else if (emergencyFundScore === 80) {
         setProTip(
-          "You have met the minimum recommended emergency fund based on your income."
+          <p>
+            You have met the minimum recommended emergency fund based on your
+            income.
+          </p>
         );
       } else if (emergencyFundScore === 70) {
         setProTip(
-          "You are more than half way there. Try saving a little extra every week to ensure you have at least 3 months of income in your emergency fund. Ex: $5 per day will add up to over $900 in 6 months."
+          <p>
+            You are more than half way there. Try saving a little extra every
+            week to ensure you have at least 3 months of income in your
+            emergency fund. Ex: $5 per day will add up to over $900 in 6 months.
+          </p>
         );
       } else if (emergencyFundScore < 70) {
         setProTip(
-          "Building a safety net for the unexpected is one of the most important ways to protect your wealth. Try saving a little extra every week to ensure you have at least 3 months of income in your emergency fund. Ex: $5 per day will add up to over $900 in 6 months."
+          <p>
+            Building a safety net for the unexpected is one of the most
+            important ways to protect your wealth. Try saving a little extra
+            every week to ensure you have at least 3 months of income in your
+            emergency fund. Ex: $5 per day will add up to over $900 in 6 months.
+          </p>
         );
       }
     }

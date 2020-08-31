@@ -14,7 +14,8 @@ const ProTip = ({ score, proTip }) => {
       )}
       {score && (
         <Tip>
-          <u>Pro tip:</u> {proTip}
+          <Heading>Pro tip:</Heading>
+          {proTip}
         </Tip>
       )}
     </>
@@ -24,6 +25,12 @@ const ProTip = ({ score, proTip }) => {
 const Status = styled.p`
   font-size: 1.5em;
   text-align: center;
+`;
+
+const Heading = styled.p`
+  font-size: 1.1em;
+  text-decoration: underline;
+  padding-bottom: 10px;
 `;
 
 const Tip = styled.p`

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { AuthContext } from "../../context/AuthContext";
@@ -30,15 +30,35 @@ const CashFlow = () => {
   useEffect(() => {
     if (cashFlowScore) {
       if (cashFlowScore === 100) {
-        setProTip("Excellent!");
+        setProTip(
+          <p>
+            You have met or exceeded the recommended savings rate. Keep it up!
+          </p>
+        );
       } else if (cashFlowScore === 90) {
-        setProTip("Very good!");
-      } else if (cashFlowScore === 80) {
-        setProTip("Good");
-      } else if (cashFlowScore === 70) {
-        setProTip("Good start");
-      } else if (cashFlowScore < 70) {
-        setProTip("Needs attention");
+        setProTip(
+          <p>
+            You are saving a good portion of your income already. Consider
+            saving any unexpected income such as bonuses or any tax refunds to
+            give you that extra savings boost.
+          </p>
+        );
+      } else if (cashFlowScore < 80) {
+        setProTip(
+          <p>
+            When it comes to saving, something is always better than nothing.
+            One technique that can help you prioritize saving is to{" "}
+            <a
+              href="https://www.investopedia.com/ask/answers/12/pay-yourself.asp"
+              target="_blank"
+            >
+              Pay Yourself First
+            </a>
+            . If it seems impossible to save anything at all, it might be time
+            to look over your expenses for savings opportunities or downsizing
+            in some areas.
+          </p>
+        );
       }
     }
   }, [cashFlowScore]);

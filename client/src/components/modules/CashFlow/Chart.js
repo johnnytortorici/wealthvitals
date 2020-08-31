@@ -28,17 +28,23 @@ const Chart = ({ income, totalNeeds, totalWants, totalSavings }) => {
               <Needs
                 percent={income !== "" ? `${(totalNeeds / income) * 100}` : 0}
               >
-                {income !== "" ? `${(totalNeeds / income) * 100}` : 0}
+                {income !== ""
+                  ? `${Math.round((totalNeeds / income) * 100)}`
+                  : 0}
               </Needs>
               <Wants
                 percent={income !== "" ? `${(totalWants / income) * 100}` : 0}
               >
-                {income !== "" ? `${(totalWants / income) * 100}` : 0}
+                {income !== ""
+                  ? `${Math.round((totalWants / income) * 100)}`
+                  : 0}
               </Wants>
               <Savings
                 percent={income !== "" ? `${(totalSavings / income) * 100}` : 0}
               >
-                {income !== "" ? `${(totalSavings / income) * 100}` : 0}
+                {income !== ""
+                  ? `${Math.round((totalSavings / income) * 100)}`
+                  : 0}
               </Savings>
             </Inside>
           </Outside>

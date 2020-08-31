@@ -10,16 +10,7 @@ const options = {
 
 const handleCashFlow = async (req, res) => {
   // deconstruct req.body
-  const {
-    _id,
-    income,
-    totalNeeds,
-    needs,
-    totalWants,
-    wants,
-    totalSavings,
-    savings,
-  } = req.body;
+  const { _id, income, needs, wants, totalSavings, savings } = req.body;
 
   // create client
   const client = await MongoClient(MONGO_URI, options);
@@ -33,18 +24,14 @@ const handleCashFlow = async (req, res) => {
     console.log("Connected!");
 
     // calculate percentages
-    const needsPercent = (totalNeeds / income) * 100;
-    const wantsPercent = (totalWants / income) * 100;
-    const savingsPercent = (totalSavings / income) * 100;
+    const savingsPercent = Math.round((totalSavings / income) * 100);
 
     // calculate score
     let score = 0;
-    if (savingsPercent >= 20) score = 100;
-    else if (savingsPercent >= 15) score = 90;
-    else if (savingsPercent >= 10) score = 80;
-    else if (savingsPercent >= 5) score = 70;
-    else if (savingsPercent > 0) score = 60;
-    else score = 50;
+    if (savingsPercent >= 15) score = 100;
+    else if (savingsPercent >= 8) score = 90;
+    else if (savingsPercent > 0) score = 70;
+    else if (savingsPercent <= 0) score = 60;
 
     const query = { _id: ObjectId(_id) };
     let newValues = {};

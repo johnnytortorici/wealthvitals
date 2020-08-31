@@ -25,13 +25,39 @@ const Debt = () => {
   useEffect(() => {
     if (debtScore) {
       if (debtScore === 100) {
-        setProTip("");
+        setProTip(<p>Your debt situation is on track. Keep it up!</p>);
       } else if (debtScore === 80) {
-        setProTip("");
-      } else if (debtScore === 70) {
-        setProTip("");
-      } else if (debtScore < 70) {
-        setProTip("");
+        setProTip(
+          <p>
+            Your debt situation is manageable. Wherever possible, discuss with
+            your bank the possibility of consolidating debts to lower your
+            overall interest payments. If you are looking for strategies to pay
+            off debt, learn how the{" "}
+            <a
+              href="https://www.daveramsey.com/blog/how-the-debt-snowball-method-works"
+              target="_blank"
+            >
+              Snowball Method
+            </a>{" "}
+            can help.
+          </p>
+        );
+      } else if (debtScore === 60) {
+        setProTip(
+          <p>
+            Your debt situation needs attention. Wherever possible, discuss with
+            your bank the possibility of consolidating debts to lower your
+            overall interest payments. If you are looking for strategies to pay
+            off debt, learn how the{" "}
+            <a
+              href="https://www.daveramsey.com/blog/how-the-debt-snowball-method-works"
+              target="_blank"
+            >
+              Snowball Method
+            </a>{" "}
+            can help.
+          </p>
+        );
       }
     }
   }, [debtScore]);
