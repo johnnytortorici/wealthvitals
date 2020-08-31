@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -8,8 +8,11 @@ import { COLORS } from "../../constants";
 import Logo from "../Logo";
 import Button from "../buttons/PrimaryButton";
 
+import { BiDownArrow } from "react-icons/bi";
+
 const Header = () => {
   const { status, name, logOut } = React.useContext(UserContext);
+  const [isOverDropDown, setIsOverDropDown] = useState(false);
 
   return (
     <Wrapper>
@@ -19,18 +22,36 @@ const Header = () => {
           <NavItemLink to="/dashboard" activeClassName="selected">
             Dashboard
           </NavItemLink>
-          <NavItemLink to="/cashflow" activeClassName="selected">
-            Cash flow
-          </NavItemLink>
-          <NavItemLink to="/emergencyfund" activeClassName="selected">
-            Emergency fund
-          </NavItemLink>
-          <NavItemLink to="/debt" activeClassName="selected">
-            Debt
-          </NavItemLink>
-          <NavItemLink to="/goals" activeClassName="selected">
-            Goals
-          </NavItemLink>
+          <DropDownWrapper
+            onMouseEnter={() => setIsOverDropDown(true)}
+            onMouseLeave={() => setIsOverDropDown(false)}
+          >
+            <DropHeading>
+              Modules <Icon size={15} />
+            </DropHeading>
+            <ModulesDropDown isOverDropDown={isOverDropDown}>
+              <ModuleItem>
+                <NavItemLink to="/cashflow" activeClassName="selected">
+                  Cash flow
+                </NavItemLink>
+              </ModuleItem>
+              <ModuleItem>
+                <NavItemLink to="/emergencyfund" activeClassName="selected">
+                  Emergency fund
+                </NavItemLink>
+              </ModuleItem>
+              <ModuleItem>
+                <NavItemLink to="/debt" activeClassName="selected">
+                  Debt
+                </NavItemLink>
+              </ModuleItem>
+              <ModuleItem>
+                <NavItemLink to="/goals" activeClassName="selected">
+                  Goals
+                </NavItemLink>
+              </ModuleItem>
+            </ModulesDropDown>
+          </DropDownWrapper>
         </Nav>
       </LogoNav>
       <Admin>
@@ -56,19 +77,49 @@ const LogoNav = styled.nav`
 `;
 
 const Nav = styled.nav`
+  display: flex;
   padding-left: 50px;
 `;
 
 const NavItemLink = styled(NavLink)`
   color: #fff;
   text-decoration: none;
-  margin-right: 30px;
   &:hover {
     opacity: 0.8;
   }
   &.selected {
     border-bottom: 2px solid #fff;
   }
+`;
+
+const DropDownWrapper = styled.div`
+  width: 175px;
+  margin-left: 30px;
+  cursor: default;
+`;
+
+const DropHeading = styled.p`
+  display: flex;
+  align-items: center;
+  padding: 0 20px 2px;
+`;
+
+const Icon = styled(BiDownArrow)`
+  margin-left: 5px;
+`;
+
+const ModulesDropDown = styled.ul`
+  display: ${(prop) => (prop.isOverDropDown ? "flex" : "none")};
+  flex-direction: column;
+  position: absolute;
+  padding: 0 20px 20px;
+  background-color: ${COLORS.THEME};
+  /* border: 1px solid #fff; */
+`;
+
+const ModuleItem = styled.li`
+  padding-top: 20px;
+  list-style-type: none;
 `;
 
 const Admin = styled.div`
