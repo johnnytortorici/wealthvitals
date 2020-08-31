@@ -6,6 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { UserContext } from "../../context/UserContext";
 import { EmergencyFundContext } from "../../context/EmergencyFundContext";
 
+import { BREAK } from "../../../constants";
 import Header from "../../header";
 import Loading from "../../Loading";
 import ModuleHeading from "../ModuleHeading";
@@ -108,6 +109,10 @@ const EmergencyFund = () => {
 
 const Wrapper = styled.div`
   padding: 0 60px;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    padding: 0 20px;
+  }
 `;
 
 const Content = styled.div`

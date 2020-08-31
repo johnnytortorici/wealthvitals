@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { COLORS } from "../../../constants";
+import { COLORS, BREAK } from "../../../constants";
 import { BsSquareFill } from "react-icons/bs";
 
 const Chart = ({ income, totalNeeds, totalWants, totalSavings }) => {
@@ -73,15 +73,17 @@ const Wrapper = styled.div`
 
 const Legend = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
-  width: 400px;
+  justify-content: center;
+  max-width: 400px;
   padding: 10px 0 40px;
 `;
 
 const LegendItem = styled.div`
   display: flex;
   align-items: center;
+  width: 133px;
 `;
 
 const LegendLabel = styled.p`
@@ -92,6 +94,10 @@ const Guages = styled.div`
   display: flex;
   justify-content: space-between;
   width: 400px;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    width: 80%;
+  }
 `;
 
 const GaugeWrapper = styled.div`

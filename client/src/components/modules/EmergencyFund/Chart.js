@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { COLORS, SIZE } from "../../../constants";
+import { COLORS, SIZE, BREAK } from "../../../constants";
 
 const Chart = ({ income, totalEmergencyFund, min, max }) => {
   return (
@@ -80,6 +80,10 @@ const GaugeWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 600px;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    width: 100%;
+  }
 `;
 
 const GaugeLabel = styled.p`

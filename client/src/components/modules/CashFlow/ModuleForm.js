@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 
 import { CashFlowContext } from "../../context/CashFlowContext";
 
-import { COLORS, SIZE } from "../../../constants";
+import { COLORS, SIZE, BREAK } from "../../../constants";
 import Button from "../../buttons/PrimaryButton";
 
 import { FiLoader } from "react-icons/fi";
@@ -35,8 +35,8 @@ const ModuleForm = () => {
         <Categories>Income</Categories>
         <FormItem>
           <Label htmlFor="income">After-tax Income (Net)</Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="income"
@@ -44,81 +44,81 @@ const ModuleForm = () => {
               onChange={(ev) => setIncome(ev.currentTarget.value)}
               required
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <Divider />
         <Categories>Needs</Categories>
         <FormItem>
           <Label htmlFor="housing">Housing</Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="housing"
               value={needs.housing}
               onChange={(ev) => setNeeds.setHousing(ev.currentTarget.value)}
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <FormItem>
           <Label htmlFor="utilities">Utilities</Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="utilities"
               value={needs.utilities}
               onChange={(ev) => setNeeds.setUtilities(ev.currentTarget.value)}
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <FormItem>
           <Label htmlFor="groceries">Groceries</Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="groceries"
               value={needs.groceries}
               onChange={(ev) => setNeeds.setGroceries(ev.currentTarget.value)}
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <FormItem>
           <Label htmlFor="transport">Transport</Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="transport"
               value={needs.transport}
               onChange={(ev) => setNeeds.setTransport(ev.currentTarget.value)}
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <FormItem>
           <Label htmlFor="healthcare">Healthcare</Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="healthcare"
               value={needs.healthcare}
               onChange={(ev) => setNeeds.setHealthcare(ev.currentTarget.value)}
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <FormItem>
           <Label htmlFor="debtMinimum">Debt minimum payments</Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="debtMinimum"
               value={needs.debtMinimum}
               onChange={(ev) => setNeeds.setDebtMinimum(ev.currentTarget.value)}
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <FormItem>
           <Total>Total Needs</Total>
@@ -128,8 +128,8 @@ const ModuleForm = () => {
         <Categories>Wants</Categories>
         <FormItem>
           <Label htmlFor="entertainment">Entertainment</Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="entertainment"
@@ -138,43 +138,43 @@ const ModuleForm = () => {
                 setWants.setEntertainment(ev.currentTarget.value)
               }
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <FormItem>
           <Label htmlFor="dining">Dining</Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="dining"
               value={wants.dining}
               onChange={(ev) => setWants.setDining(ev.currentTarget.value)}
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <FormItem>
           <Label htmlFor="shopping">Shopping</Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="shopping"
               value={wants.shopping}
               onChange={(ev) => setWants.setShopping(ev.currentTarget.value)}
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <FormItem>
           <Label htmlFor="gifts">Gifts</Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="gifts"
               value={wants.gifts}
               onChange={(ev) => setWants.setGifts(ev.currentTarget.value)}
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <FormItem>
           <Total>Total Wants</Total>
@@ -184,32 +184,32 @@ const ModuleForm = () => {
         <Categories>Savings</Categories>
         <FormItem>
           <Label htmlFor="emergency">Emergency fund</Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="emergency"
               value={savings.emergency}
               onChange={(ev) => setSavings.setEmergency(ev.currentTarget.value)}
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <FormItem>
           <Label htmlFor="saving">Saving & Investing</Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="saving"
               value={savings.saving}
               onChange={(ev) => setSavings.setSaving(ev.currentTarget.value)}
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <FormItem>
           <Label htmlFor="debtRepayment">Debt repayment (above minimum)</Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="debtRepayment"
@@ -218,7 +218,7 @@ const ModuleForm = () => {
                 setSavings.setDebtRepayment(ev.currentTarget.value)
               }
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <FormItem>
           <Total>Total Savings</Total>
@@ -270,6 +270,10 @@ const Wrapper = styled.div`
 const Form = styled.form`
   padding: 40px 0;
   width: 500px;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    width: 100%;
+  }
 `;
 
 const Heading = styled.h2`
@@ -292,10 +296,20 @@ const FormItem = styled.div`
 
 const Label = styled.label`
   padding-left: 20px;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    padding-left: 0;
+  }
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Input = styled.input`
   width: 100px;
+  margin-left: 5px;
 `;
 
 const Categories = styled.h2``;
@@ -303,6 +317,10 @@ const Categories = styled.h2``;
 const Total = styled.p`
   padding-left: 20px;
   font-weight: 600;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    padding-left: 0;
+  }
 `;
 
 const Divider = styled.div`

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { COLORS, SIZE } from "../constants";
+import { COLORS, SIZE, BREAK } from "../constants";
 
 const Score = ({ title, score, scoreMessage }) => {
   return (
@@ -16,6 +16,10 @@ const Score = ({ title, score, scoreMessage }) => {
 const Wrapper = styled.div`
   width: 33%;
   text-align: center;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    width: 100%;
+  }
 `;
 
 const Grade = styled.p`

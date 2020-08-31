@@ -4,61 +4,81 @@ import styled from "styled-components";
 
 import { UserContext } from "../context/UserContext";
 
-import { COLORS } from "../../constants";
+import { COLORS, BREAK } from "../../constants";
+import MobileNav from "./MobileNav";
 import Logo from "../Logo";
 import Button from "../buttons/PrimaryButton";
 
 import { BiDownArrow } from "react-icons/bi";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { MdClose } from "react-icons/md";
 
 const Header = () => {
   const { name, logOut } = React.useContext(UserContext);
   const [isOverDropDown, setIsOverDropDown] = useState(false);
+  const [mobileMenuIsClicked, setMobileMenuIsClicked] = useState(false);
 
   return (
-    <Wrapper>
-      <LogoNav>
-        <Logo />
-        <Nav>
-          <NavItemLink to="/dashboard" activeClassName="selected">
-            Dashboard
-          </NavItemLink>
-          <DropDownWrapper
-            onMouseEnter={() => setIsOverDropDown(true)}
-            onMouseLeave={() => setIsOverDropDown(false)}
-          >
-            <DropHeading>
-              Modules <Icon size={15} />
-            </DropHeading>
-            <ModulesDropDown isOverDropDown={isOverDropDown}>
-              <ModuleItem>
-                <NavItemLink to="/cashflow" activeClassName="selected">
-                  Cash flow
-                </NavItemLink>
-              </ModuleItem>
-              <ModuleItem>
-                <NavItemLink to="/emergencyfund" activeClassName="selected">
-                  Emergency fund
-                </NavItemLink>
-              </ModuleItem>
-              <ModuleItem>
-                <NavItemLink to="/debt" activeClassName="selected">
-                  Debt
-                </NavItemLink>
-              </ModuleItem>
-              <ModuleItem>
-                <NavItemLink to="/goals" activeClassName="selected">
-                  Goals
-                </NavItemLink>
-              </ModuleItem>
-            </ModulesDropDown>
-          </DropDownWrapper>
-        </Nav>
-      </LogoNav>
-      <Admin>
-        <p>Hi, {name}</p>
-        <Logout onClick={logOut}>Log out</Logout>
-      </Admin>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <LogoNav>
+          <Logo />
+          <Nav>
+            <NavItemLink to="/dashboard" activeClassName="selected">
+              Dashboard
+            </NavItemLink>
+            <DropDownWrapper
+              onMouseEnter={() => setIsOverDropDown(true)}
+              onMouseLeave={() => setIsOverDropDown(false)}
+            >
+              <DropHeading>
+                Modules <Icon size={15} />
+              </DropHeading>
+              <ModulesDropDown isOverDropDown={isOverDropDown}>
+                <ModuleItem>
+                  <NavItemLink to="/cashflow" activeClassName="selected">
+                    Cash flow
+                  </NavItemLink>
+                </ModuleItem>
+                <ModuleItem>
+                  <NavItemLink to="/emergencyfund" activeClassName="selected">
+                    Emergency fund
+                  </NavItemLink>
+                </ModuleItem>
+                <ModuleItem>
+                  <NavItemLink to="/debt" activeClassName="selected">
+                    Debt
+                  </NavItemLink>
+                </ModuleItem>
+                <ModuleItem>
+                  <NavItemLink to="/goals" activeClassName="selected">
+                    Goals
+                  </NavItemLink>
+                </ModuleItem>
+              </ModulesDropDown>
+            </DropDownWrapper>
+          </Nav>
+        </LogoNav>
+        <Admin>
+          <p>Hi, {name}</p>
+          <Logout onClick={logOut}>Log out</Logout>
+        </Admin>
+        <MobileMenu
+          onClick={() =>
+            !mobileMenuIsClicked
+              ? setMobileMenuIsClicked(true)
+              : setMobileMenuIsClicked(false)
+          }
+        >
+          {!mobileMenuIsClicked ? (
+            <GiHamburgerMenu size={16} />
+          ) : (
+            <MdClose size={16} />
+          )}
+        </MobileMenu>
+      </Wrapper>
+      <MobileNav mobileMenuIsClicked={mobileMenuIsClicked} />
+    </>
   );
 };
 
@@ -79,6 +99,10 @@ const LogoNav = styled.nav`
 const Nav = styled.nav`
   display: flex;
   padding-left: 50px;
+
+  @media (max-width: ${BREAK.MEDIUM}) {
+    display: none;
+  }
 `;
 
 const NavItemLink = styled(NavLink)`
@@ -114,7 +138,6 @@ const ModulesDropDown = styled.ul`
   position: absolute;
   padding: 0 20px 20px;
   background-color: ${COLORS.THEME};
-  /* border: 1px solid #fff; */
 `;
 
 const ModuleItem = styled.li`
@@ -125,12 +148,25 @@ const ModuleItem = styled.li`
 const Admin = styled.div`
   display: flex;
   align-items: center;
+
+  @media (max-width: ${BREAK.MEDIUM}) {
+    display: none;
+  }
 `;
 
 const Logout = styled(Button)`
   margin-left: 20px;
   font-size: 0.8em;
   border: 2px solid #fff;
+`;
+
+const MobileMenu = styled(Button)`
+  display: none;
+  border: 2px solid #fff;
+
+  @media (max-width: ${BREAK.MEDIUM}) {
+    display: inherit;
+  }
 `;
 
 export default Header;

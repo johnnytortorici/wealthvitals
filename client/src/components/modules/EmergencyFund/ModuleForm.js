@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 
 import { EmergencyFundContext } from "../../context/EmergencyFundContext";
 
-import { COLORS } from "../../../constants";
+import { COLORS, BREAK } from "../../../constants";
 import Button from "../../buttons/PrimaryButton";
 
 import { FiLoader } from "react-icons/fi";
@@ -28,8 +28,8 @@ const ModuleForm = () => {
         <Categories>Monthly Income</Categories>
         <FormItem>
           <Label htmlFor="income">After-tax Income (Net)</Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="income"
@@ -37,7 +37,7 @@ const ModuleForm = () => {
               onChange={(ev) => setIncome(ev.currentTarget.value)}
               required
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <Divider />
         <Categories>Emergency fund</Categories>
@@ -45,29 +45,29 @@ const ModuleForm = () => {
           <Label htmlFor="currentSavings">
             Current emergency savings (optional)
           </Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="currentSavings"
               value={currentSavings}
               onChange={(ev) => setCurrentSavings(ev.currentTarget.value)}
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <FormItem>
           <Label htmlFor="monthlySavings">
             Monthly savings goal (optional)
           </Label>
-          <div>
-            ${" "}
+          <InputWrapper>
+            $
             <Input
               type="number"
               id="monthlySavings"
               value={monthlySavings}
               onChange={(ev) => setMonthlySavings(ev.currentTarget.value)}
             />
-          </div>
+          </InputWrapper>
         </FormItem>
         <FormItem>
           <Total>Total within 6 months</Total>
@@ -103,6 +103,10 @@ const Wrapper = styled.div`
 const Form = styled.form`
   padding: 40px 0;
   width: 500px;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    width: 100%;
+  }
 `;
 
 const FormItem = styled.div`
@@ -114,10 +118,20 @@ const FormItem = styled.div`
 
 const Label = styled.label`
   padding-left: 20px;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    padding-left: 0;
+  }
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Input = styled.input`
   width: 100px;
+  margin-left: 5px;
 `;
 
 const Categories = styled.h2``;
@@ -125,6 +139,10 @@ const Categories = styled.h2``;
 const Total = styled.p`
   padding-left: 20px;
   font-weight: 600;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    padding-left: 0;
+  }
 `;
 
 const Divider = styled.div`

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+import { BREAK } from "../../constants";
+
 import Score from "../Score";
 
 const ModuleHeading = ({ title, moduleNum, score }) => {
@@ -37,11 +39,21 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   padding: 20px;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    flex-direction: column-reverse;
+    padding-bottom: 40px;
+  }
 `;
 
 const Title = styled.div`
   width: 33%;
   text-align: center;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    width: 100%;
+    padding-bottom: 40px;
+  }
 `;
 
 export default ModuleHeading;

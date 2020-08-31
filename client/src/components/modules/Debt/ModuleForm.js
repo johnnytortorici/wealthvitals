@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 
 import { DebtContext } from "../../context/DebtContext";
 
-import { COLORS } from "../../../constants";
+import { COLORS, BREAK } from "../../../constants";
 import Button from "../../buttons/PrimaryButton";
 
 import { FiLoader } from "react-icons/fi";
@@ -129,6 +129,10 @@ const Wrapper = styled.div`
 const Form = styled.form`
   padding: 40px 0;
   width: 600px;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    width: 100%;
+  }
 `;
 
 const FormItem = styled.div`
@@ -140,6 +144,10 @@ const FormItem = styled.div`
 
 const Label = styled.label`
   padding-left: 20px;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    padding-left: 0;
+  }
 `;
 
 const InputWrapper = styled.div`
@@ -157,6 +165,10 @@ const Categories = styled.h2``;
 const Total = styled.p`
   padding-left: 20px;
   font-weight: 600;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    padding-left: 0;
+  }
 `;
 
 const Divider = styled.div`

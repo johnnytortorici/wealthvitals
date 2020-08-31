@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 
 import { GoalsContext } from "../../context/GoalsContext";
 
-import { COLORS } from "../../../constants";
+import { COLORS, BREAK } from "../../../constants";
 import Button from "../../buttons/SecondaryButton";
 
 import { FiCheckCircle, FiLoader } from "react-icons/fi";
@@ -175,6 +175,10 @@ const InputWrapper = styled.div`
   justify-content: space-between;
   padding: 10px;
   width: 20%;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    width: 100%;
+  }
 `;
 
 const Status = styled.p`
@@ -222,6 +226,11 @@ const Actions = styled.div`
   align-items: flex-end;
   padding: 10px;
   width: 40%;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    width: 100%;
+    justify-content: center;
+  }
 `;
 
 const ActionBtn = styled(Button)`

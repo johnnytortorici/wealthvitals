@@ -6,6 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { UserContext } from "../../context/UserContext";
 import { GoalsContext } from "../../context/GoalsContext";
 
+import { BREAK } from "../../../constants";
 import { COLORS } from "../../../constants";
 import Button from "../../buttons/PrimaryButton";
 import Header from "../../header";
@@ -140,6 +141,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px 60px;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    padding: 20px 20px;
+  }
 `;
 
 const ModuleHeading = styled.div`
@@ -151,6 +156,10 @@ const SectionHeading = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid ${COLORS.BORDER};
+
+  @media (max-width: ${BREAK.SMALL}) {
+    flex-direction: column;
+  }
 `;
 
 const GoalsWrapper = styled.div``;

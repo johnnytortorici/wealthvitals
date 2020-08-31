@@ -6,6 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { UserContext } from "../../context/UserContext";
 import { CashFlowContext } from "../../context/CashFlowContext";
 
+import { BREAK } from "../../../constants";
 import Header from "../../header";
 import Loading from "../../Loading";
 import ModuleHeading from "../ModuleHeading";
@@ -107,6 +108,10 @@ const CashFlow = () => {
 
 const Wrapper = styled.div`
   padding: 0 60px;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    padding: 0 20px;
+  }
 `;
 
 const Content = styled.div`

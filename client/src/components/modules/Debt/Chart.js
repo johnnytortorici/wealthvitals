@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { COLORS, SIZE } from "../../../constants";
+import { COLORS, SIZE, BREAK } from "../../../constants";
 
 const Chart = ({ debtRatio }) => {
   const dollarAmount = (debtRatio / 100).toFixed(2).toLocaleString("en-CA");
@@ -55,6 +55,10 @@ const Outside = styled.div`
   background-color: #fff;
   border: 1px solid ${COLORS.BORDER};
   border-radius: 10px;
+
+  @media (max-width: ${BREAK.SMALL}) {
+    width: 100%;
+  }
 `;
 const MyRatio = styled.div`
   padding-bottom: 30px;
