@@ -4,6 +4,10 @@ import styled from "styled-components";
 
 import { AuthContext } from "./context/AuthContext";
 import { UserContext } from "./context/UserContext";
+import { CashFlowContext } from "./context/CashFlowContext";
+import { EmergencyFundContext } from "./context/EmergencyFundContext";
+import { DebtContext } from "./context/DebtContext";
+import { GoalsContext } from "./context/GoalsContext";
 
 import { COLORS } from "../constants";
 import Logo from "./Logo";
@@ -12,6 +16,10 @@ import SignUpButton from "./buttons/PrimaryButton";
 const SignUp = () => {
   const { authTokens, setTokens } = useContext(AuthContext);
   const { getUser } = useContext(UserContext);
+  const { getCashFlow } = useContext(CashFlowContext);
+  const { getEmergencyFund } = useContext(EmergencyFundContext);
+  const { getDebt } = useContext(DebtContext);
+  const { getGoals } = useContext(GoalsContext);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -33,6 +41,10 @@ const SignUp = () => {
       .then((json) => {
         if (json.status === 201) {
           getUser(json.user._id);
+          getCashFlow(json.user._id);
+          getEmergencyFund(json.user._id);
+          getDebt(json.user._id);
+          getGoals(json.user._id);
           setTokens(json.user._id);
         } else {
           alert("Something went wrong.");

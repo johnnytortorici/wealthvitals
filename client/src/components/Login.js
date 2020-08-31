@@ -7,6 +7,7 @@ import { UserContext } from "./context/UserContext";
 import { CashFlowContext } from "./context/CashFlowContext";
 import { EmergencyFundContext } from "./context/EmergencyFundContext";
 import { DebtContext } from "./context/DebtContext";
+import { GoalsContext } from "./context/GoalsContext";
 
 import { COLORS } from "../constants";
 import Logo from "./Logo";
@@ -18,6 +19,7 @@ const Login = () => {
   const { getCashFlow } = useContext(CashFlowContext);
   const { getEmergencyFund } = useContext(EmergencyFundContext);
   const { getDebt } = useContext(DebtContext);
+  const { getGoals } = useContext(GoalsContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,6 +43,7 @@ const Login = () => {
           getCashFlow(json.user._id);
           getEmergencyFund(json.user._id);
           getDebt(json.user._id);
+          getGoals(json.user._id);
           setTokens(json.user._id);
         } else {
           setError(json.message);
