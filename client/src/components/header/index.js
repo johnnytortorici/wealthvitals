@@ -100,7 +100,7 @@ const Nav = styled.nav`
   display: flex;
   padding-left: 50px;
 
-  @media (max-width: ${BREAK.MEDIUM}) {
+  @media (max-width: ${BREAK.NAV}) {
     display: none;
   }
 `;
@@ -149,7 +149,7 @@ const Admin = styled.div`
   display: flex;
   align-items: center;
 
-  @media (max-width: ${BREAK.MEDIUM}) {
+  @media (max-width: ${BREAK.NAV}) {
     display: none;
   }
 `;
@@ -164,7 +164,7 @@ const MobileMenu = styled(Button)`
   display: none;
   border: 2px solid #fff;
 
-  @media (max-width: ${BREAK.MEDIUM}) {
+  @media (max-width: ${BREAK.NAV}) {
     display: inherit;
   }
 `;

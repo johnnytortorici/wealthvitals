@@ -9,9 +9,12 @@ import Button from "../../buttons/SecondaryButton";
 import { FiCheckCircle, FiLoader } from "react-icons/fi";
 
 const GoalItem = ({ goal, type, index }) => {
-  const { goalsStatus, handleSave, handleDelete } = React.useContext(
-    GoalsContext
-  );
+  const {
+    goalsStatus,
+    handleSave,
+    handleUpdate,
+    handleDelete,
+  } = React.useContext(GoalsContext);
   const [description, setDescription] = useState(
     goal.description ? goal.description : ""
   );
@@ -132,10 +135,31 @@ const GoalItem = ({ goal, type, index }) => {
       </InputWrapper>
       <Actions>
         {goalStatus ? (
-          <SavedStatus>
-            <FiCheckCircle color={COLORS.GREEN} />
-            <Saved>Saved</Saved>
-          </SavedStatus>
+          <>
+            <SavedStatus>
+              <FiCheckCircle color={COLORS.GREEN} />
+              <Saved>Saved</Saved>
+            </SavedStatus>
+            <ActionBtn
+              onClick={(ev) => {
+                handleUpdate(
+                  ev,
+                  type,
+                  description,
+                  category,
+                  goalAmount,
+                  starting,
+                  monthly,
+                  dueDate,
+                  setEstimatedDate,
+                  setGoalStatus
+                );
+              }}
+              disabled={goalsStatus === "loading"}
+            >
+              {goalsStatus !== "loading" ? "Update" : <LoaderIcon />}
+            </ActionBtn>
+          </>
         ) : (
           <ActionBtn type="submit" disabled={goalsStatus === "loading"}>
             {goalsStatus !== "loading" ? "Calculate" : <LoaderIcon />}
@@ -175,6 +199,10 @@ const InputWrapper = styled.div`
   justify-content: space-between;
   padding: 10px;
   width: 20%;
+
+  @media (max-width: ${BREAK.MEDIUM}) {
+    width: 50%;
+  }
 
   @media (max-width: ${BREAK.SMALL}) {
     width: 100%;
@@ -226,6 +254,11 @@ const Actions = styled.div`
   align-items: flex-end;
   padding: 10px;
   width: 40%;
+
+  @media (max-width: ${BREAK.MEDIUM}) {
+    width: 100%;
+    justify-content: center;
+  }
 
   @media (max-width: ${BREAK.SMALL}) {
     width: 100%;

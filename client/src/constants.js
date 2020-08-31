@@ -15,5 +15,6 @@ export const SIZE = {
 
 export const BREAK = {
   MEDIUM: "950px",
+  NAV: "850px",
   SMALL: "700px",
 };

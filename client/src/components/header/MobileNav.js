@@ -42,7 +42,7 @@ const Wrapper = styled.div`
   background-color: ${COLORS.THEME};
   border-top: 1px solid #fff;
 
-  @media (min-width: 951px) {
+  @media (min-width: 851px) {
     display: none;
   }
 `;

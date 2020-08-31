@@ -63,8 +63,50 @@ export const GoalsProvider = ({ children }) => {
       .then((json) => {
         if (json.status === 200) {
           let { estimatedDate, goalStatus } = json.goal;
-          // setIsComplete(isComplete);
-          // setScore(score);
+          setEstimatedDate(estimatedDate);
+          setGoalStatus(goalStatus);
+          setStatus("idle");
+        } else {
+          console.log(json);
+        }
+      });
+  };
+
+  const handleUpdate = (
+    ev,
+    type,
+    description,
+    category,
+    goalAmount,
+    starting,
+    monthly,
+    dueDate,
+    setEstimatedDate,
+    setGoalStatus
+  ) => {
+    ev.preventDefault();
+    setStatus("loading");
+
+    fetch("/updateGoal", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id: id,
+        type: type,
+        description: description,
+        category: category,
+        goalAmount: goalAmount,
+        starting: starting,
+        monthly: monthly,
+        dueDate: dueDate,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.status === 200) {
+          let { estimatedDate, goalStatus } = json.goal;
           setEstimatedDate(estimatedDate);
           setGoalStatus(goalStatus);
           setStatus("idle");
@@ -165,6 +207,7 @@ export const GoalsProvider = ({ children }) => {
         goalsStatus: status,
         goalsIsComplete: isComplete,
         handleSave,
+        handleUpdate,
         handleDelete,
         goalsScore: score,
         smallGoals,

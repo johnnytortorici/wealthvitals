@@ -55,8 +55,6 @@ const handleAddGoal = async (req, res) => {
     else if (duration > 0) goalStatus = "Very close";
     else goalStatus = "On track";
 
-    // calculate score
-
     const query = { _id: ObjectId(_id) };
     let newValues = {};
 

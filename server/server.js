@@ -11,6 +11,7 @@ const { handleEmergencyFund } = require("./handlers/handleEmergencyFund");
 const { handleDebt } = require("./handlers/handleDebt");
 const { handleAddGoal } = require("./handlers/handleAddGoal");
 const { handleDeleteGoal } = require("./handlers/handleDeleteGoal");
+const { handleUpdateGoal } = require("./handlers/handleUpdateGoal");
 
 app.listen(8000);
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,4 +26,5 @@ app.post("/cashflow", handleCashFlow);
 app.post("/emergencyfund", handleEmergencyFund);
 app.post("/debt", handleDebt);
 app.post("/addGoal", handleAddGoal);
+app.post("/updateGoal", handleUpdateGoal);
 app.delete("/deleteGoal", handleDeleteGoal);
