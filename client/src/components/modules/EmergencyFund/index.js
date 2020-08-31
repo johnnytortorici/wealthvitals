@@ -17,7 +17,6 @@ const EmergencyFund = () => {
   const { authTokens } = React.useContext(AuthContext);
   const { status } = React.useContext(UserContext);
   const {
-    emergencyFundStatus,
     emergencyFundScore,
     income,
     min,

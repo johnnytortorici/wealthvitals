@@ -6,7 +6,6 @@ export const DebtContext = React.createContext(null);
 
 export const DebtProvider = ({ children }) => {
   const [status, setStatus] = useState("loading");
-  const [error, setError] = useState("");
   const [isComplete, setIsComplete] = useState();
   const [score, setScore] = useState("");
   const { id, isLoggedOut, setIsLoggedOut } = useContext(UserContext);
@@ -80,7 +79,6 @@ export const DebtProvider = ({ children }) => {
           setStatus("idle");
           window.scrollTo(0, 0);
         } else {
-          setError(json.message);
           console.log(json);
         }
       });
@@ -127,7 +125,6 @@ export const DebtProvider = ({ children }) => {
   useEffect(() => {
     if (isLoggedOut === true) {
       setStatus("loading");
-      setError("");
       setIsComplete();
       setScore("");
       setIncome("");

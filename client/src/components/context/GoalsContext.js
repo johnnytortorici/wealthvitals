@@ -6,7 +6,6 @@ export const GoalsContext = React.createContext(null);
 
 export const GoalsProvider = ({ children }) => {
   const [status, setStatus] = useState("loading");
-  const [error, setError] = useState("");
   const [isComplete, setIsComplete] = useState();
   const [score, setScore] = useState(0);
   const { id, isLoggedOut, setIsLoggedOut } = useContext(UserContext);
@@ -70,7 +69,6 @@ export const GoalsProvider = ({ children }) => {
           setGoalStatus(goalStatus);
           setStatus("idle");
         } else {
-          setError(json.message);
           console.log(json);
         }
       });
@@ -109,7 +107,6 @@ export const GoalsProvider = ({ children }) => {
           }
           setStatus("idle");
         } else {
-          setError(json.message);
           console.log(json);
         }
       });
@@ -128,7 +125,7 @@ export const GoalsProvider = ({ children }) => {
       .then((res) => res.json())
       .then((json) => {
         if (json.status === 200) {
-          let { isComplete, score, small, medium, large } = json.modules.goals;
+          let { small, medium, large } = json.modules.goals;
           // setIsComplete(isComplete);
           // score && setScore(score);
           small && setSmallGoals(small);
@@ -144,7 +141,6 @@ export const GoalsProvider = ({ children }) => {
   useEffect(() => {
     if (isLoggedOut === true) {
       setStatus("loading");
-      setError("");
       setIsComplete();
       setScore("");
       setSmallGoals([]);

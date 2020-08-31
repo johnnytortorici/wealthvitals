@@ -47,7 +47,7 @@ const SignUp = () => {
           getGoals(json.user._id);
           setTokens(json.user._id);
         } else {
-          alert("Something went wrong.");
+          setError(json.message);
         }
       });
   };

@@ -27,19 +27,19 @@ const Status = styled.p`
   text-align: center;
 `;
 
-const Heading = styled.p`
-  font-size: 1.1em;
-  text-decoration: underline;
-  padding-bottom: 10px;
-`;
-
-const Tip = styled.p`
+const Tip = styled.div`
   margin: 30px 0;
   padding: 10px;
   border: 1px solid ${COLORS.BORDER};
   border-radius: 10px;
   background-color: #fff;
   font-weight: 600;
+`;
+
+const Heading = styled.p`
+  font-size: 1.1em;
+  text-decoration: underline;
+  padding-bottom: 10px;
 `;
 
 export default ProTip;

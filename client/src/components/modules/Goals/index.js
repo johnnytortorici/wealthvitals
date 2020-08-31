@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 
@@ -6,11 +6,10 @@ import { AuthContext } from "../../context/AuthContext";
 import { UserContext } from "../../context/UserContext";
 import { GoalsContext } from "../../context/GoalsContext";
 
-import { COLORS, SIZE, BREAK } from "../../../constants";
+import { COLORS } from "../../../constants";
 import Button from "../../buttons/PrimaryButton";
 import Header from "../../header";
 import Loading from "../../Loading";
-import ProTip from "../ProTip";
 import GoalItem from "./GoalItem";
 
 import { FaPizzaSlice } from "react-icons/fa";
@@ -19,7 +18,6 @@ const Goals = () => {
   const { authTokens } = React.useContext(AuthContext);
   const { status } = React.useContext(UserContext);
   const {
-    goalsScore,
     smallGoals,
     handleAddSmall,
     mediumGoals,
@@ -27,8 +25,6 @@ const Goals = () => {
     largeGoals,
     handleAddLarge,
   } = React.useContext(GoalsContext);
-
-  const [proTip, setProTip] = useState("");
 
   return (
     <>
@@ -169,30 +165,6 @@ const Icon = styled.div`
   padding-right: 20px;
   font-size: 2em;
   color: ${COLORS.THEME};
-`;
-
-const ColHeadings = styled.ul`
-  display: flex;
-  list-style-type: none;
-  border-bottom: 1px solid ${COLORS.BORDER};
-`;
-
-const Heading = styled.li`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 20%;
-  padding-bottom: 10px;
-`;
-
-const Status = styled.li`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 10%;
-  padding-bottom: 10px;
 `;
 
 const Content = styled.div`

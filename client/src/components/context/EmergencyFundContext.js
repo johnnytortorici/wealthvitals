@@ -6,7 +6,6 @@ export const EmergencyFundContext = React.createContext(null);
 
 export const EmergencyFundProvider = ({ children }) => {
   const [status, setStatus] = useState("loading");
-  const [error, setError] = useState("");
   const [isComplete, setIsComplete] = useState();
   const [score, setScore] = useState("");
   const { id, isLoggedOut, setIsLoggedOut } = useContext(UserContext);
@@ -74,7 +73,6 @@ export const EmergencyFundProvider = ({ children }) => {
 
           window.scrollTo(0, 0);
         } else {
-          setError(json.message);
           console.log(json);
         }
       });
@@ -115,7 +113,6 @@ export const EmergencyFundProvider = ({ children }) => {
   useEffect(() => {
     if (isLoggedOut === true) {
       setStatus("loading");
-      setError("");
       setIsComplete();
       setScore("");
       setIncome("");

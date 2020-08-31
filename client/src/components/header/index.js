@@ -11,7 +11,7 @@ import Button from "../buttons/PrimaryButton";
 import { BiDownArrow } from "react-icons/bi";
 
 const Header = () => {
-  const { status, name, logOut } = React.useContext(UserContext);
+  const { name, logOut } = React.useContext(UserContext);
   const [isOverDropDown, setIsOverDropDown] = useState(false);
 
   return (

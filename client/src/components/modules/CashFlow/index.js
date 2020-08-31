@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 
 import { AuthContext } from "../../context/AuthContext";
@@ -17,7 +17,6 @@ const CashFlow = () => {
   const { authTokens } = React.useContext(AuthContext);
   const { status } = React.useContext(UserContext);
   const {
-    cashFlowStatus,
     cashFlowScore,
     income,
     totalNeeds,
@@ -51,6 +50,7 @@ const CashFlow = () => {
             <a
               href="https://www.investopedia.com/ask/answers/12/pay-yourself.asp"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Pay Yourself First
             </a>

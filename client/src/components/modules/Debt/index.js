@@ -16,9 +16,7 @@ import ModuleForm from "./ModuleForm";
 const Debt = () => {
   const { authTokens } = React.useContext(AuthContext);
   const { status } = React.useContext(UserContext);
-  const { debtStatus, debtScore, income, debtRatio } = React.useContext(
-    DebtContext
-  );
+  const { debtScore, debtRatio } = React.useContext(DebtContext);
 
   const [proTip, setProTip] = useState("");
 
@@ -36,6 +34,7 @@ const Debt = () => {
             <a
               href="https://www.daveramsey.com/blog/how-the-debt-snowball-method-works"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Snowball Method
             </a>{" "}
@@ -52,6 +51,7 @@ const Debt = () => {
             <a
               href="https://www.daveramsey.com/blog/how-the-debt-snowball-method-works"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Snowball Method
             </a>{" "}
