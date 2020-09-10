@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 
+const PORT = process.env.PORT || 8000;
+
 const { handleSignUp } = require("./handlers/handleSignUp");
 const { handleLogin } = require("./handlers/handleLogin");
 const { handleUser } = require("./handlers/handleUser");
@@ -13,7 +15,7 @@ const { handleAddGoal } = require("./handlers/handleAddGoal");
 const { handleDeleteGoal } = require("./handlers/handleDeleteGoal");
 const { handleUpdateGoal } = require("./handlers/handleUpdateGoal");
 
-app.listen(8000);
+app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
