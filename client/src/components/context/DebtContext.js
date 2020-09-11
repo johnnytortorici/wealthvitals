@@ -9,7 +9,7 @@ export const DebtProvider = ({ children }) => {
   const [isComplete, setIsComplete] = useState();
   const [score, setScore] = useState("");
   const { id, isLoggedOut, setIsLoggedOut } = useContext(UserContext);
-  const { authTokens } = useContext(AuthContext);
+  const { authTokens, SERVER_URI } = useContext(AuthContext);
 
   // INCOME
   const [income, setIncome] = useState("");
@@ -40,7 +40,7 @@ export const DebtProvider = ({ children }) => {
     ev.preventDefault();
     setStatus("loading");
 
-    fetch("/debt", {
+    fetch(`${SERVER_URI}/debt`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -87,7 +87,7 @@ export const DebtProvider = ({ children }) => {
   const getDebt = (id) => {
     setStatus("loading");
 
-    fetch(`/getModules`, {
+    fetch(`${SERVER_URI}/getModules`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -145,6 +145,7 @@ export const DebtProvider = ({ children }) => {
         getDebt(tokenId);
       }
     }
+    // eslint-disable-next-line
   }, [isComplete, authTokens]);
 
   return (

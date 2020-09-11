@@ -10,10 +10,10 @@ export const UserProvider = ({ children }) => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
 
-  const { authTokens, setTokens } = React.useContext(AuthContext);
+  const { authTokens, setTokens, SERVER_URI } = React.useContext(AuthContext);
 
   const getUser = (id) => {
-    fetch(`/getUser`, {
+    fetch(`${SERVER_URI}/getUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

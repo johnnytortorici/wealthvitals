@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+const SERVER_URI = process.env.REACT_APP_SERVER_URI;
 export const AuthContext = React.createContext(null);
 
 export const AuthProvider = ({ children }) => {
@@ -17,7 +18,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ authTokens, setTokens }}>
+    <AuthContext.Provider value={{ authTokens, setTokens, SERVER_URI }}>
       {children}
     </AuthContext.Provider>
   );

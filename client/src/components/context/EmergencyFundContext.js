@@ -9,7 +9,7 @@ export const EmergencyFundProvider = ({ children }) => {
   const [isComplete, setIsComplete] = useState();
   const [score, setScore] = useState("");
   const { id, isLoggedOut, setIsLoggedOut } = useContext(UserContext);
-  const { authTokens } = useContext(AuthContext);
+  const { authTokens, SERVER_URI } = useContext(AuthContext);
 
   // INCOME
   const [income, setIncome] = useState("");
@@ -39,7 +39,7 @@ export const EmergencyFundProvider = ({ children }) => {
     ev.preventDefault();
     setStatus("loading");
 
-    fetch("/emergencyfund", {
+    fetch(`${SERVER_URI}/emergencyfund`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +81,7 @@ export const EmergencyFundProvider = ({ children }) => {
   const getEmergencyFund = (id) => {
     setStatus("loading");
 
-    fetch(`/getModules`, {
+    fetch(`${SERVER_URI}/getModules`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -132,6 +132,7 @@ export const EmergencyFundProvider = ({ children }) => {
         getEmergencyFund(tokenId);
       }
     }
+    // eslint-disable-next-line
   }, [isComplete, authTokens]);
 
   return (

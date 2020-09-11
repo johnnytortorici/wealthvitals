@@ -9,7 +9,7 @@ export const CashFlowProvider = ({ children }) => {
   const [isComplete, setIsComplete] = useState();
   const [score, setScore] = useState("");
   const { id, isLoggedOut, setIsLoggedOut } = useContext(UserContext);
-  const { authTokens } = useContext(AuthContext);
+  const { authTokens, SERVER_URI } = useContext(AuthContext);
 
   // INCOME
   const [income, setIncome] = useState("");
@@ -141,7 +141,7 @@ export const CashFlowProvider = ({ children }) => {
     ev.preventDefault();
     setStatus("loading");
 
-    fetch("/cashflow", {
+    fetch(`${SERVER_URI}/cashflow`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -185,7 +185,7 @@ export const CashFlowProvider = ({ children }) => {
   const getCashFlow = (id) => {
     setStatus("loading");
 
-    fetch(`/getModules`, {
+    fetch(`${SERVER_URI}/getModules`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

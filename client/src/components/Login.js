@@ -14,7 +14,7 @@ import Logo from "./Logo";
 import LoginButton from "./buttons/PrimaryButton";
 
 const Login = () => {
-  const { authTokens, setTokens } = useContext(AuthContext);
+  const { authTokens, setTokens, SERVER_URI } = useContext(AuthContext);
   const { getUser } = useContext(UserContext);
   const { getCashFlow } = useContext(CashFlowContext);
   const { getEmergencyFund } = useContext(EmergencyFundContext);
@@ -29,7 +29,7 @@ const Login = () => {
     ev.preventDefault();
     const user = { email, password };
 
-    fetch("/login", {
+    fetch(`${SERVER_URI}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

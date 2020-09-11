@@ -16,6 +16,8 @@ import EmergencyFund from "./modules/EmergencyFund";
 import Debt from "./modules/Debt";
 import Goals from "./modules/Goals";
 
+require("dotenv").config();
+
 function App() {
   return (
     <AuthProvider>

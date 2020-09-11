@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
 
@@ -16,6 +17,7 @@ const { handleDeleteGoal } = require("./handlers/handleDeleteGoal");
 const { handleUpdateGoal } = require("./handlers/handleUpdateGoal");
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

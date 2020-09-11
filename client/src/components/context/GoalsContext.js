@@ -9,7 +9,7 @@ export const GoalsProvider = ({ children }) => {
   const [isComplete, setIsComplete] = useState();
   const [score, setScore] = useState(0);
   const { id, isLoggedOut, setIsLoggedOut } = useContext(UserContext);
-  const { authTokens } = useContext(AuthContext);
+  const { authTokens, SERVER_URI } = useContext(AuthContext);
 
   // GOALS
   const [smallGoals, setSmallGoals] = useState([]);
@@ -43,7 +43,7 @@ export const GoalsProvider = ({ children }) => {
     ev.preventDefault();
     setStatus("loading");
 
-    fetch("/addGoal", {
+    fetch(`${SERVER_URI}/addGoal`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -87,7 +87,7 @@ export const GoalsProvider = ({ children }) => {
     ev.preventDefault();
     setStatus("loading");
 
-    fetch("/updateGoal", {
+    fetch(`${SERVER_URI}/updateGoal`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -121,7 +121,7 @@ export const GoalsProvider = ({ children }) => {
 
     setStatus("loading");
 
-    fetch("/deleteGoal", {
+    fetch(`${SERVER_URI}/deleteGoal`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -157,7 +157,7 @@ export const GoalsProvider = ({ children }) => {
   const getGoals = (id) => {
     setStatus("loading");
 
-    fetch(`/getModules`, {
+    fetch(`${SERVER_URI}/getModules`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -199,6 +199,7 @@ export const GoalsProvider = ({ children }) => {
         getGoals(tokenId);
       }
     }
+    // eslint-disable-next-line
   }, [isComplete, authTokens]);
 
   return (
