@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { COLORS } from "../constants";
+import { COLORS, BREAK } from "../constants";
 
 export default createGlobalStyle`
   * {
@@ -12,6 +12,10 @@ export default createGlobalStyle`
     background-color: ${COLORS.BACKGROUND};
     color: ${COLORS.PRIMARY_TEXT};
     font-size: 1.1em;
+
+    @media (max-width: ${BREAK.NAV}) {
+      font-size: 1em;
+    }
   }
   a {
     color: ${COLORS.PRIMARY_TEXT};

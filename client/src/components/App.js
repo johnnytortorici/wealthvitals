@@ -8,6 +8,7 @@ import { DebtProvider } from "./context/DebtContext";
 import { GoalsProvider } from "./context/GoalsContext";
 import GlobalStyles from "./GlobalStyles";
 
+import Home from "./home";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import Dashboard from "./dashboard";
@@ -28,6 +29,9 @@ function App() {
               <GoalsProvider>
                 <Router>
                   <Switch>
+                    <Route path="/" exact>
+                      <Home />
+                    </Route>
                     <Route path="/login">
                       <Login />
                     </Route>

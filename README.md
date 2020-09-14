@@ -1,6 +1,6 @@
-# Wealthvitals - Your digital financial plan
+# Wealthvitals - Level up your money
 
-Wealthvitals is a financial planning application that aims to empower users to take better control of their finances. As you explore the different areas of your financial plan, educational tips are available to help you improve wherever needed.
+Wealthvitals is a roadmap to level up your money. Find out where you stand and how you can become a wealthier you.
 
 ---
 

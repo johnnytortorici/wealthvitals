@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Redirect, Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import { AuthContext } from "./context/AuthContext";
 import { UserContext } from "./context/UserContext";
@@ -11,7 +11,8 @@ import { GoalsContext } from "./context/GoalsContext";
 
 import { COLORS } from "../constants";
 import Logo from "./Logo";
-import SignUpButton from "./buttons/PrimaryButton";
+import Button from "./buttons/PrimaryButton";
+import { FiLoader } from "react-icons/fi";
 
 const SignUp = () => {
   const { authTokens, setTokens, SERVER_URI } = useContext(AuthContext);
@@ -21,6 +22,7 @@ const SignUp = () => {
   const { getDebt } = useContext(DebtContext);
   const { getGoals } = useContext(GoalsContext);
 
+  const [status, setStatus] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,6 +30,7 @@ const SignUp = () => {
 
   const handleSignUp = (ev) => {
     ev.preventDefault();
+    setStatus("loading");
     const user = { name, email, password };
 
     fetch(`${SERVER_URI}/signup`, {
@@ -48,6 +51,7 @@ const SignUp = () => {
           setTokens(json.user._id);
         } else {
           setError(json.message);
+          setStatus("idle");
         }
       });
   };
@@ -84,7 +88,11 @@ const SignUp = () => {
             onChange={(ev) => setPassword(ev.currentTarget.value)}
             required
           />
-          <SignUpButton type="submit">Sign up</SignUpButton>
+          <ButtonWrapper>
+            <SignUpButton type="submit" disabled={status === "loading"}>
+              {status !== "loading" ? "Sign up" : <LoaderIcon />}
+            </SignUpButton>
+          </ButtonWrapper>
         </Form>
         <Helper>
           Already have an account? <Link to="/login">Login</Link>
@@ -135,6 +143,31 @@ const InputLabel = styled.label`
 const Helper = styled.p`
   font-size: 0.8em;
   text-align: center;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 20px;
+`;
+
+const SignUpButton = styled(Button)`
+  width: 100%;
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: ${COLORS.PRIMARY_TEXT};
+  }
+`;
+
+const loader = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const LoaderIcon = styled(FiLoader)`
+  animation: ${loader} 2000ms infinite;
 `;
 
 export default SignUp;

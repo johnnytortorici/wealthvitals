@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Redirect, Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import { AuthContext } from "./context/AuthContext";
 import { UserContext } from "./context/UserContext";
@@ -11,7 +11,8 @@ import { GoalsContext } from "./context/GoalsContext";
 
 import { COLORS } from "../constants";
 import Logo from "./Logo";
-import LoginButton from "./buttons/PrimaryButton";
+import Button from "./buttons/PrimaryButton";
+import { FiLoader } from "react-icons/fi";
 
 const Login = () => {
   const { authTokens, setTokens, SERVER_URI } = useContext(AuthContext);
@@ -21,12 +22,14 @@ const Login = () => {
   const { getDebt } = useContext(DebtContext);
   const { getGoals } = useContext(GoalsContext);
 
+  const [status, setStatus] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleLogin = (ev) => {
     ev.preventDefault();
+    setStatus("loading");
     const user = { email, password };
 
     fetch(`${SERVER_URI}/login`, {
@@ -48,6 +51,7 @@ const Login = () => {
         } else {
           setError(json.message);
           console.log(json);
+          setStatus("idle");
         }
       });
   };
@@ -76,7 +80,11 @@ const Login = () => {
             onChange={(ev) => setPassword(ev.currentTarget.value)}
             required
           />
-          <LoginButton type="submit">Login</LoginButton>
+          <ButtonWrapper>
+            <LoginButton type="submit" disabled={status === "loading"}>
+              {status !== "loading" ? "Login" : <LoaderIcon />}
+            </LoginButton>
+          </ButtonWrapper>
         </Form>
         <Helper>
           New to Wealthvitals? <Link to="/signup">Sign up</Link>
@@ -127,6 +135,31 @@ const InputLabel = styled.label`
 const Helper = styled.p`
   font-size: 0.8em;
   text-align: center;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 20px;
+`;
+
+const LoginButton = styled(Button)`
+  width: 100%;
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: ${COLORS.PRIMARY_TEXT};
+  }
+`;
+
+const loader = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const LoaderIcon = styled(FiLoader)`
+  animation: ${loader} 2000ms infinite;
 `;
 
 export default Login;
